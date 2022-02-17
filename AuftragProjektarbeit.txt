@@ -1,0 +1,90 @@
+Entity:
+	- Customer
+		+ CustomerId
+		+ Name
+		+ Email
+		+ Website
+		+ Password
+	- Address
+		+ AddressId
+		+ Street
+		+ TownId
+		+ CountryId
+	- Town
+		+ TownId
+		+ PLZ
+		+ Name
+	- Country
+		+ CountryId
+		+ Name
+	- Article
+		+ ArticleId
+		+ Name
+		+ Price
+		+ ArticleGroupId
+	- ArticleGroup
+		+ ArticleGroupId
+		+ Name
+		+ HigherLevelArticleGroupId
+	- Order
+		+ OrderNr
+		+ Date
+		+ CustomerId
+		+ PositionId
+	- Position
+		+ PositionId
+		+ Quantity	
+		+ ArticleId			
+	
+Dokumentation (PDF)
+	- Vorgehen
+	- Ergebniss
+	- Inbetriebnahme (Applikation und Datenbank)
+	- Link zu Git Repository
+	- ERM
+	- UseCase-Diagramm
+	- Komponentendiagramm
+	- Klassendiagramm
+	- Sequenzdiagramm
+	
+Arbeitsjournal
+	- Welche Arbeit
+	- Zeitaufwand
+	
+Funktionale Anforderungen
+	- Verwaltung oben genannter Entity (CRUD)
+		+ Kunden verwalten
+		+ Artikelgruppen verwalten
+		+ Artikel verwalten
+		+ Aufträge verwalten
+	- Suchen nach Name(Kunde, Artikelgruppe, Artikel) und Id(Aufträge)
+	
+		
+Technologie
+	- C#
+	- WPF
+	- Entity Framework CodeFirst
+	- MS SQL Server
+	
+	
+
+Aufgaben (3) --> zu jeder muss bei Fertigstellung ein Git Tag erstellt werden «Abgabe:AufgabeXYZ»
+	- Common table expression
+		+ Erstellen einer Seite mit ArtikelGruppen als TreeView
+		+ Datengrundlage mittels rekursiver CTE
+		+ Eventuell muss eine Artikelgruppe ausgewählt werden können
+		
+	- Window Function (wahrscheinlich auch temporale Strukturen)
+		+ Erstellen einer Seite mit Ausgabe in GridView
+		+ Format des Grid und YOY siehe Auftrags PDF
+		+ Daten pro Quartal der letzten 3 Jahre ausgeben (Anzahl Aufträge, Anzahl verwaltete Artikel, Durchschnittliche Anzahl Artikel pro Auftrag, Umsatz pro Kunde, Gesamtumsatz)
+		+ Eventuell mit SQLServer-Operatoren PIVOT und UNPIVOT auseinandersetzen
+		
+	- Temporale Datenstruktur
+		+ Erstellen einer Seite mit Ausgabe in GridView
+		+ Filter sollen in der GridView gesetzt werden können (Abfrage wird damit eingeschränkt)
+		+ Abfrage erstellen die Rechnungen auflistet mit Attributen --> KundenNr, Name, Strasse, PLZ, Ort, Land, Rechnungsdatum(AuftragsDatum), RechnungsNummer(AuftragsNr), Rechnungsbetrag netto(Summe der Positionen), Rechnungsbetrag brutto (Summer + MwSt.)
+		
+	- Testdaten in der EF Migration erstellen
+		+ Die Funktionalen Anforderungen sollen ohne manuelles erstellen von Daten getestet werden können
+		
