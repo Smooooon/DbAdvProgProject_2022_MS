@@ -27,10 +27,10 @@ Entity:
 		+ Name
 		+ HigherLevelArticleGroupId
 	- Order
-		+ OrderNr
-		+ Date
+		+ OrderId
+		+ Ordered
 		+ CustomerId
-		+ PositionId
+		+ PositionId <List>
 	- Position
 		+ PositionId
 		+ Quantity	
