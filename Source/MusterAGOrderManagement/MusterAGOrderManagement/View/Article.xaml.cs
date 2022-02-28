@@ -1,6 +1,7 @@
-﻿using MusterAGOrderManagement.ViewModel;
+﻿using MusterAGOrderManagement.Article.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace MusterAGOrderManagement.View
     /// <summary>
     /// Interaction logic for Article.xaml
     /// </summary>
-    public partial class Article : Window
+    public partial class Article : UserControl
     {
         public Article()
         {

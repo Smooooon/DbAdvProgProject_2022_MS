@@ -64,12 +64,10 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public ArticleDao Update(int id, ArticleDao articleDao)
+        public ArticleDao Update(ArticleDao articleDao)
         {
             using (DataContext context = new DataContext())
             {
-                articleDao.Id = id;
-
                 context.Update(articleDao);
                 context.SaveChanges();
 

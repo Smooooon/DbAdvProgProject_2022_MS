@@ -1,6 +1,7 @@
 ﻿using MusterAG.BusinessLogic.Dto;
 using MusterAG.DataAccessLayer.Dao;
 using MusterAGOrderManagement.Model;
+using MusterAGOrderManagement.Model.Article;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace MusterAGOrderManagement.Mapping
 {
     internal static class ArticleViewMapper
     {
-        public static ArticleModel ToModel(this ArticleDto articleDto)
+        public static ArticleItemModel ToModel(this ArticleDto articleDto)
         {
-            ArticleModel articleModel = new ArticleModel();
+            ArticleItemModel articleModel = new ArticleItemModel();
             articleModel.Id = articleDto.Id;
             articleModel.Name = articleDto.Name;
             articleModel.Price = articleDto.Price;
@@ -22,7 +23,7 @@ namespace MusterAGOrderManagement.Mapping
             return articleModel;
         }
 
-        public static ArticleDto ToDto(this ArticleModel articleModel)
+        public static ArticleDto ToDto(this ArticleItemModel articleModel)
         {
             ArticleDto articleDto = new ArticleDto();
             articleDto.Id = articleModel.Id;

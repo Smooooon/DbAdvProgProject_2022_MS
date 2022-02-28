@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusterAGOrderManagement.Model
+namespace MusterAGOrderManagement.Model.Article
 {
-    internal class ArticleModel
+    internal class ArticleItemModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

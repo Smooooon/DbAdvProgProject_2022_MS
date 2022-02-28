@@ -26,5 +26,35 @@ namespace MusterAG.BusinessLogic.Domain
 
             return articleDtoList;
         }
+
+        public bool UpdateArticles(IList<ArticleDto> articleDtoList)
+        {
+            bool success = true;
+
+            foreach (ArticleDto articleDto in articleDtoList)
+            {
+                ArticleDao articleDao = articleDto.ToDao();
+                ArticleDao updatedArticleDao = _articleDataService.Update(articleDao);
+
+                if (updatedArticleDao == null)
+                    success = false;
+            }
+
+
+            return success;
+        }
+
+        public bool CreateArticle(ArticleDto articleDto)
+        {
+            ArticleDao articleDao = articleDto.ToDao();
+            ArticleDao createdArticleDao = _articleDataService.Create(articleDao);
+
+            return createdArticleDao != null;
+        }
+
+        public bool DeleteArticle(int articleIdToDelete)
+        {
+            return _articleDataService.Delete(articleIdToDelete);
+        }
     }
 }

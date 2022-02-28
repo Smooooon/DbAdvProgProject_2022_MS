@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusterAGOrderManagement.ViewModel.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,10 @@ namespace MusterAGOrderManagement
     {
         public MainWindow()
         {
+            DataContext = new HomeViewModel();
             InitializeComponent();
         }
+
+
     }
 }

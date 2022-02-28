@@ -15,4 +15,11 @@
     <ProjectReference Include="..\MusterAG.Core\MusterAG.BusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\Customer\" />
+    <Folder Include="ViewModel\ArticleGroup\" />
+    <Folder Include="ViewModel\Position\" />
+    <Folder Include="ViewModel\Order\" />
+  </ItemGroup>
+
 </Project>
