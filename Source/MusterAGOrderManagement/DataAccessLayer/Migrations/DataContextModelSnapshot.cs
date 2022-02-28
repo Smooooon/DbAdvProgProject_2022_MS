@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations
+namespace MusterAG.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Address", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.AddressDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Article", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.ArticleGroup", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("ArticleGroups");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Country", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CountryDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,7 +105,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Customer", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Order", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +153,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Position", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.PositionDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int?>("OrderDaoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -172,12 +172,12 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderDaoId");
 
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Town", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.TownDao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,14 +196,14 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Towns");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Position", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.PositionDao", b =>
                 {
-                    b.HasOne("DataAccessLayer.Dao.Order", null)
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.OrderDao", null)
                         .WithMany("Positions")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderDaoId");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Dao.Order", b =>
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
                 {
                     b.Navigation("Positions");
                 });

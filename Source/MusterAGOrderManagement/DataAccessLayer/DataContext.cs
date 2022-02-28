@@ -23,7 +23,7 @@ namespace DataAccessLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=MusterAG; Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=MusterAG;Trusted_Connection=True;");
 
             base.OnConfiguring(optionsBuilder);
         }

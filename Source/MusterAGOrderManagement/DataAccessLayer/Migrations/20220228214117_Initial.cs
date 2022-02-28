@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations
+namespace MusterAG.DataAccessLayer.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -119,22 +119,22 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     ArticleId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    OrderDaoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Positions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Positions_Orders_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_Positions_Orders_OrderDaoId",
+                        column: x => x.OrderDaoId,
                         principalTable: "Orders",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Positions_OrderId",
+                name: "IX_Positions_OrderDaoId",
                 table: "Positions",
-                column: "OrderId");
+                column: "OrderDaoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
