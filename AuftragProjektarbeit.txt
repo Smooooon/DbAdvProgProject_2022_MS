@@ -5,15 +5,16 @@ Entity:
 		+ Email
 		+ Website
 		+ Password
+		+ AddressId
 	- Address
 		+ AddressId
 		+ Street
 		+ TownId
-		+ CountryId
 	- Town
 		+ TownId
 		+ PLZ
 		+ Name
+		+ CountryId
 	- Country
 		+ CountryId
 		+ Name

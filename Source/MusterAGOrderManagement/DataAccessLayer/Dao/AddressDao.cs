@@ -10,6 +10,5 @@ namespace MusterAG.DataAccessLayer.Dao
     {
         public string Street { get; set; }
         public int TownId { get; set; }
-        public int CountryId { get; set; }
     }
 }

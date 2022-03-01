@@ -8,6 +8,11 @@ namespace MusterAG.DataAccessLayer.Dao
 {
     public class CountryDao : BaseDao
     {
+        public CountryDao()
+        {
+            this.TownDao = new HashSet<TownDao>();
+        }
         public string Name { get; set; }
+        public ICollection<TownDao> TownDao { get; set; }
     }
 }

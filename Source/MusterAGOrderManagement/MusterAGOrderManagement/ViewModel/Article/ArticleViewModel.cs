@@ -15,13 +15,18 @@ using System.Data;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using MusterAGOrderManagement.ViewModel;
+using MusterAGOrderManagement.Model.ArticleGroup;
 
 namespace MusterAGOrderManagement.Article.ViewModel
 {
-    internal class ArticleViewModel
+    internal class ArticleViewModel : BaseViewModel
     {
         ArticleModel _articleModel = new ArticleModel();
         private ArticleDomain _articleDomain;
+        private ArticleGroupDomain _articleGroupDomain;
+
+        public IList<ArticleGroupItemModel> ArticleGroupList { get; set; }
 
         public ObservableCollection<ArticleItemModel> ArticleList 
         {
@@ -99,6 +104,12 @@ namespace MusterAGOrderManagement.Article.ViewModel
         public ArticleViewModel()
         {
             _articleDomain = new ArticleDomain();
+            _articleGroupDomain = new ArticleGroupDomain();
+            IList<ArticleGroupDto> articleGroups = _articleGroupDomain.LoadArticleGroups();
+
+            foreach (ArticleGroupDto articleGroupDto in articleGroups)
+                ArticleGroupList.Add(articleGroupDto.ToModel());
+
             RefreshArticleList();
         }
 
@@ -115,13 +126,6 @@ namespace MusterAGOrderManagement.Article.ViewModel
 
             foreach (ArticleDto articleDto in articleDtoList)
                 ArticleList.Add(articleDto.ToModel());
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var eventArgs = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged?.Invoke(this, eventArgs);
         }
     }
 }

@@ -19,13 +19,15 @@ using MusterAGOrderManagement.Model.Home;
 
 namespace MusterAGOrderManagement.ViewModel.Home
 {
-    internal class HomeViewModel
+    internal class HomeViewModel : BaseViewModel
     {
         HomeModel _homeModel = new HomeModel();
 
         public HomeViewModel()
         {
             IsDatabaseConnected = false;
+
+            InstallNewestMigration();
         }
 
         public bool IsDatabaseConnected
@@ -38,11 +40,10 @@ namespace MusterAGOrderManagement.ViewModel.Home
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void InstallNewestMigration()
         {
-            var eventArgs = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged?.Invoke(this, eventArgs);
+            HomeDomain homeDomain = new HomeDomain();
+            homeDomain.InstallNewestMigration();
         }
     }
 }

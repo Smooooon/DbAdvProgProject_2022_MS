@@ -17,6 +17,7 @@ namespace DataAccessLayer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Weiterer Code
+            modelBuilder.Entity<TownDao>().HasKey(t => t.Id);
 
             base.OnModelCreating(modelBuilder);
         }

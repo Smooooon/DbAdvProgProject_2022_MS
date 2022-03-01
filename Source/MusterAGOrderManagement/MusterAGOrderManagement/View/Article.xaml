@@ -25,6 +25,14 @@
         <Button Command="{Binding DeleteItemCommand}" CommandParameter="{Binding SelectedItem}" Margin="246,382,429,56" Content="Delete"/>
         <Button Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding ArticleList}" Margin="10,382,672,56" Content="Save All"/>
         <Button Command="{Binding AddNewItemCommand}" CommandParameter="{Binding NewItem}"  Margin="620,161,62,266" Content="Add New"/>
+
+        
+        
+        <WrapPanel>
+            <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Artikel Gruppe:" Height="30" Width="120" />
+            <ComboBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  SelectedValue="{Binding ArticleGroupId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding ArticleGroupList}"/>
+        </WrapPanel>
+
         <StackPanel Margin="382,10,270,266">
             <Label Content="Name:" HorizontalAlignment="Left"/>
             <Label Content="Preis:" HorizontalAlignment="Left"/>

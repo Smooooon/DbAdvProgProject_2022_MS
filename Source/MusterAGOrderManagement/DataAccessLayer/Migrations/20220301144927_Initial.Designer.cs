@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MusterAG.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220228214117_Initial")]
+    [Migration("20220301144927_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,6 @@ namespace MusterAG.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -115,6 +112,9 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -129,6 +129,8 @@ namespace MusterAG.DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
                 });
@@ -187,15 +189,32 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Name")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PLZ")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Towns");
+                });
+
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
+                {
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.AddressDao", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.PositionDao", b =>
@@ -203,6 +222,22 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasOne("MusterAG.DataAccessLayer.Dao.OrderDao", null)
                         .WithMany("Positions")
                         .HasForeignKey("OrderDaoId");
+                });
+
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.TownDao", b =>
+                {
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.CountryDao", "Country")
+                        .WithMany("TownDao")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CountryDao", b =>
+                {
+                    b.Navigation("TownDao");
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
