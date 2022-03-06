@@ -20,6 +20,9 @@
             <TabItem Header="Article">
                 <localviews:Article />
             </TabItem>
+            <TabItem Header="Order">
+                <localviews:Order/>
+            </TabItem>
         </TabControl>
 
     </Grid>
