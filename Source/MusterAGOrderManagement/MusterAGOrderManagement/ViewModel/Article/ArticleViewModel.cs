@@ -105,7 +105,8 @@ namespace MusterAGOrderManagement.Article.ViewModel
         {
             _articleDomain = new ArticleDomain();
             _articleGroupDomain = new ArticleGroupDomain();
-            IList<ArticleGroupDto> articleGroups = _articleGroupDomain.LoadArticleGroups();
+            ArticleGroupList = new List<ArticleGroupItemModel>();
+            IList <ArticleGroupDto> articleGroups = _articleGroupDomain.LoadArticleGroups();
 
             foreach (ArticleGroupDto articleGroupDto in articleGroups)
                 ArticleGroupList.Add(articleGroupDto.ToModel());

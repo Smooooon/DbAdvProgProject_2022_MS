@@ -10,5 +10,6 @@ namespace MusterAG.DataAccessLayer.Dao
     {
         public string Name { get; set; }
         public int? HigherLevelArticleGroupId { get; set; }
+        public virtual ArticleGroupDao? HigherLevelArticleGroup { get; set; }
     }
 }

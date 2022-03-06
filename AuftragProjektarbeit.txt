@@ -31,11 +31,11 @@ Entity:
 		+ OrderId
 		+ Ordered
 		+ CustomerId
-		+ PositionId <List>
 	- Position
 		+ PositionId
 		+ Quantity	
-		+ ArticleId			
+		+ ArticleId
+		+ OrderId			
 	
 Dokumentation (PDF)
 	- Vorgehen

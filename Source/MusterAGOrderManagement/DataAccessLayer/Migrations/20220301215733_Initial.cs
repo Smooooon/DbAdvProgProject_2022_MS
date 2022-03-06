@@ -144,6 +144,45 @@ namespace MusterAG.DataAccessLayer.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Addresses",
+                columns: new[] { "Id", "Street", "TownId" },
+                values: new object[,]
+                {
+                    { 1, "Teststrasse 1", 1 },
+                    { 2, "Teststrasse 2", 1 },
+                    { 3, "Lolastrasse 1", 2 },
+                    { 4, "Lolastrasse 2", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Schweiz" },
+                    { 2, "Deutschland" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "AddressId", "Email", "Name", "Password", "Website" },
+                values: new object[,]
+                {
+                    { 1, 1, "max.muster@muster.com", "Max Muster", "dasPasswort", "muster.com" },
+                    { 2, 2, "manuela.sturzi@sturzi.com", "Manuela Sturzi", "dasPasswort2", "sturzi.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "CountryId", "Name", "PLZ" },
+                values: new object[,]
+                {
+                    { 1, 1, "St.Gallen", 9000 },
+                    { 2, 1, "Hauptwil", 9213 },
+                    { 3, 2, "Konstanz", 1111 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_AddressId",
                 table: "Customers",

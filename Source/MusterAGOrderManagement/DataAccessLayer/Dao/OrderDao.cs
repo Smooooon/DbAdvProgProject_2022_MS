@@ -10,7 +10,7 @@ namespace MusterAG.DataAccessLayer.Dao
     {
         public DateTime Ordered { get; set; }
         public int CustomerId { get; set; }
-        public int PositionId { get; set; }
-        public ICollection<PositionDao> Positions { get; set; }
+        public virtual CustomerDao Customer { get; set; }
+        public virtual ICollection<PositionDao> Positions { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace MusterAG.DataAccessLayer.Dao
             this.TownDao = new HashSet<TownDao>();
         }
         public string Name { get; set; }
-        public ICollection<TownDao> TownDao { get; set; }
+        public virtual ICollection<TownDao> TownDao { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MusterAG.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220301144927_Initial")]
+    [Migration("20220301215733_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,32 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Street = "Teststrasse 1",
+                            TownId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Street = "Teststrasse 2",
+                            TownId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Street = "Lolastrasse 1",
+                            TownId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Street = "Lolastrasse 2",
+                            TownId = 2
+                        });
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleDao", b =>
@@ -102,6 +128,18 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Schweiz"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Deutschland"
+                        });
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
@@ -133,6 +171,26 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = 1,
+                            Email = "max.muster@muster.com",
+                            Name = "Max Muster",
+                            Password = "dasPasswort",
+                            Website = "muster.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AddressId = 2,
+                            Email = "manuela.sturzi@sturzi.com",
+                            Name = "Manuela Sturzi",
+                            Password = "dasPasswort2",
+                            Website = "sturzi.com"
+                        });
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
@@ -204,6 +262,29 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Towns");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = 1,
+                            Name = "St.Gallen",
+                            PLZ = 9000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CountryId = 1,
+                            Name = "Hauptwil",
+                            PLZ = 9213
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CountryId = 2,
+                            Name = "Konstanz",
+                            PLZ = 1111
+                        });
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
