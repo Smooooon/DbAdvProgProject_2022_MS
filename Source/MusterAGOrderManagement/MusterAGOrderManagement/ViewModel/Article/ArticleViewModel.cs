@@ -1,20 +1,10 @@
-﻿using Caliburn.Micro;
-using MusterAG.BusinessLogic.Domain;
+﻿using MusterAG.BusinessLogic.Domain;
 using MusterAG.BusinessLogic.Dto;
 using MusterAGOrderManagement.Model.Article;
 using MusterAGOrderManagement.Mapping;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Data;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using MusterAGOrderManagement.ViewModel;
 using MusterAGOrderManagement.Model.ArticleGroup;
 
@@ -45,26 +35,6 @@ namespace MusterAGOrderManagement.Article.ViewModel
             {
                 _articleModel.SelectedItem = value;
                 OnPropertyChanged();
-            }
-        }
-
-        public ArticleItemModel NewItem
-        {
-            get { return _articleModel.NewItem; }
-            set
-            {
-                _articleModel.NewItem = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool IsValide
-        {
-            get
-            {
-                return SelectedItem != null &&
-                    !string.IsNullOrWhiteSpace(SelectedItem.Name) &&
-                     SelectedItem.Price != 0;
             }
         }
 
@@ -122,8 +92,6 @@ namespace MusterAGOrderManagement.Article.ViewModel
                 ArticleList.Clear();
             else
                 ArticleList = new ObservableCollection<ArticleItemModel>();
-
-            NewItem = new ArticleItemModel();
 
             foreach (ArticleDto articleDto in articleDtoList)
                 ArticleList.Add(articleDto.ToModel());

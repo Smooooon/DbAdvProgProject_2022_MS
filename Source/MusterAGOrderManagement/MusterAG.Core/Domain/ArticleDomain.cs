@@ -44,12 +44,12 @@ namespace MusterAG.BusinessLogic.Domain
             return success;
         }
 
-        public bool CreateArticle(ArticleDto articleDto)
+        public ArticleDto CreateArticle(ArticleDto articleDto)
         {
             ArticleDao articleDao = articleDto.ToDao();
             ArticleDao createdArticleDao = _articleDataService.Create(articleDao);
 
-            return createdArticleDao != null;
+            return createdArticleDao.ToDto();
         }
 
         public bool DeleteArticle(int articleIdToDelete)

@@ -11,6 +11,5 @@ namespace MusterAGOrderManagement.Model.Article
     {
         public ObservableCollection<ArticleItemModel>? Articles { get; set; }
         public ArticleItemModel SelectedItem { get; set; }
-        public ArticleItemModel NewItem { get; set; }
     }
 }
