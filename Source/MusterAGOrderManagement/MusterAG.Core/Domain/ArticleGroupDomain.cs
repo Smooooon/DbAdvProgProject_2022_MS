@@ -2,11 +2,6 @@
 using MusterAG.BusinessLogic.Dto;
 using MusterAG.BusinessLogic.Mapping;
 using MusterAG.DataAccessLayer.Dao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusterAG.BusinessLogic.Domain
 {
@@ -14,7 +9,7 @@ namespace MusterAG.BusinessLogic.Domain
     {
         public ArticleGroupDataService _articleGroupDataService = new ArticleGroupDataService();
 
-        public IList<ArticleGroupDto> LoadArticleGroups()
+        public IList<ArticleGroupDto> GetArticleGroups()
         {
             IList<ArticleGroupDto> articleGroupDtoList = new List<ArticleGroupDto>();
 
@@ -24,6 +19,35 @@ namespace MusterAG.BusinessLogic.Domain
                 articleGroupDtoList.Add(articleGroupDao.ToDto());
 
             return articleGroupDtoList;
+        }
+
+        public bool UpdateArticleGroups(IList<ArticleGroupDto> articleGroupDtoList)
+        {
+            bool success = true;
+
+            foreach (ArticleGroupDto articleGroupDto in articleGroupDtoList)
+            {
+                ArticleGroupDao articleGroupDao = articleGroupDto.ToDao();
+                ArticleGroupDao updatedArticleGroupDao = _articleGroupDataService.Update(articleGroupDao);
+
+                if (updatedArticleGroupDao == null)
+                    success = false;
+            }
+
+            return success;
+        }
+
+        public ArticleGroupDto CreateArticleGroup(ArticleGroupDto articleGroupDto)
+        {
+            ArticleGroupDao articleGroupDao = articleGroupDto.ToDao();
+            ArticleGroupDao createdArticleGroupDao = _articleGroupDataService.Create(articleGroupDao);
+
+            return createdArticleGroupDao.ToDto();
+        }
+
+        public bool DeleteArticleGroup(int articleGroupIdToDelete)
+        {
+            return _articleGroupDataService.Delete(articleGroupIdToDelete);
         }
     }
 }
