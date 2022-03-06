@@ -27,8 +27,8 @@ namespace MusterAGOrderManagement.ViewModel.Order
         {
             if (parameter is OrderItemModel)
             {
-                OrderItemModel articleItemModel = (OrderItemModel)parameter;
-                _orderDomain.DeleteOrder(articleItemModel.Id);
+                OrderItemModel orderItemModel = (OrderItemModel)parameter;
+                _orderDomain.DeleteOrder(orderItemModel.Id);
 
                 _orderViewModel.RefreshOrderList();
             }

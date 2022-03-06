@@ -9,29 +9,29 @@ namespace DataAccessLayer.Services
         {
         }
 
-        public OrderDao Create(OrderDao OrderDao)
+        public OrderDao Create(OrderDao orderDao)
         {
             using (DataContext context = new DataContext())
             {
-                var createdResult = context.Add(OrderDao);
+                var createdResult = context.Add(orderDao);
                 context.SaveChanges();
 
-                OrderDao = createdResult.Entity;
+                orderDao = createdResult.Entity;
             }
 
-            return OrderDao;
+            return orderDao;
         }
 
         public bool Delete(int id)
         {
             using (DataContext context = new DataContext())
             {
-                var OrderToDelete = context.Orders.FirstOrDefault(a => a.Id == id);
+                var orderToDelete = context.Orders.FirstOrDefault(a => a.Id == id);
 
-                if (OrderToDelete == null)
+                if (orderToDelete == null)
                     return false;
 
-                context.Remove(OrderToDelete);
+                context.Remove(orderToDelete);
                 context.SaveChanges();
 
                 return true;
@@ -53,13 +53,13 @@ namespace DataAccessLayer.Services
 
         public IList<OrderDao> GetAll()
         {
-            IList<OrderDao> OrderDtoList;
+            IList<OrderDao> orderDtoList;
 
             using (DataContext context = new DataContext())
             {
-                OrderDtoList = context.Orders.ToList();
+                orderDtoList = context.Orders.ToList();
 
-                return OrderDtoList;
+                return orderDtoList;
             }
         }
 

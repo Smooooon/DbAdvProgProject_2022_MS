@@ -8,7 +8,7 @@
         Title="MainWindow" Height="500" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="TabItem">
+            <TabItem Header="Home">
                 <Grid Background="#FFE5E5E5">
                     <CheckBox Content="Datenbankverbindung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="{Binding IsDatabaseConnected}"/>
 
@@ -22,6 +22,9 @@
             </TabItem>
             <TabItem Header="Order">
                 <localviews:Order/>
+            </TabItem>
+            <TabItem Header="Position">
+                <localviews:Position/>
             </TabItem>
         </TabControl>
 
