@@ -7,6 +7,9 @@ namespace MusterAG.BusinessLogic.Mapping
     {
         public static AddressDao ToDao(this AddressDto addressDto)
         {
+            if (addressDto == null)
+                return null;
+
             AddressDao addressDao = new AddressDao();
             addressDao.Id = addressDto.Id;
             addressDao.Street = addressDto.Street;
@@ -17,6 +20,9 @@ namespace MusterAG.BusinessLogic.Mapping
 
         public static AddressDto ToDto(this AddressDao addressDao)
         {
+            if (addressDao == null)
+                return null;
+
             AddressDto addressDto = new AddressDto();
             addressDto.Id = addressDao.Id;
             addressDto.Street = addressDao.Street;

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
 using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
@@ -58,7 +59,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                articleDtoList = context.Articles.ToList();
+                articleDtoList = context.Articles.Include("ArticleGroup").ToList();
 
                 return articleDtoList;
             }
@@ -66,6 +67,9 @@ namespace DataAccessLayer.Services
 
         public ArticleDao Update(ArticleDao articleDao)
         {
+            //Objekt ignorieren
+            articleDao.ArticleGroup = null;
+
             using (DataContext context = new DataContext())
             {
                 context.Update(articleDao);

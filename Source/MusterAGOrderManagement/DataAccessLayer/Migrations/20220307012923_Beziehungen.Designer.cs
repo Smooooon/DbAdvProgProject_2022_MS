@@ -4,6 +4,7 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MusterAG.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220307012923_Beziehungen")]
+    partial class Beziehungen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,9 +142,6 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ArticleGroupDaoId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("HigherLevelArticleGroupId")
                         .HasColumnType("int");
 
@@ -152,9 +151,9 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleGroupDaoId");
-
-                    b.HasIndex("HigherLevelArticleGroupId");
+                    b.HasIndex("HigherLevelArticleGroupId")
+                        .IsUnique()
+                        .HasFilter("[HigherLevelArticleGroupId] IS NOT NULL");
 
                     b.ToTable("ArticleGroups");
 
@@ -490,14 +489,8 @@ namespace MusterAG.DataAccessLayer.Migrations
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", b =>
                 {
                     b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", null)
-                        .WithMany()
-                        .HasForeignKey("ArticleGroupDaoId");
-
-                    b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", "HigherLevelArticleGroup")
-                        .WithMany()
-                        .HasForeignKey("HigherLevelArticleGroupId");
-
-                    b.Navigation("HigherLevelArticleGroup");
+                        .WithOne("HigherLevelArticleGroup")
+                        .HasForeignKey("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", "HigherLevelArticleGroupId");
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
@@ -560,6 +553,9 @@ namespace MusterAG.DataAccessLayer.Migrations
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("HigherLevelArticleGroup")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CountryDao", b =>

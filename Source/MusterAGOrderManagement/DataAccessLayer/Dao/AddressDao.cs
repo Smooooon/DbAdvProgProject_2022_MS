@@ -11,5 +11,6 @@ namespace MusterAG.DataAccessLayer.Dao
         public string Street { get; set; }
         public int TownId { get; set; }
         public virtual TownDao Town { get; set; }
+        public virtual ICollection<CustomerDao> Customers { get; set; }
     }
 }

@@ -30,7 +30,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Produkt" Binding="{Binding Name}" Width="0.2*"/>
                 <DataGridTextColumn Header="Preis" Binding="{Binding Price}" Width="0.1*"/>
-                <DataGridTextColumn Header="Artikel-Gruppe" Binding="{Binding ArticleGroupId}" Width="0.3*"/>
+                <DataGridTextColumn Header="Artikel-Gruppe" Binding="{Binding ArticleGroup.Name}" Width="0.3*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">

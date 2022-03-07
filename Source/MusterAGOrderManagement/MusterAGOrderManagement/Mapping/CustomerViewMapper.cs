@@ -7,6 +7,9 @@ namespace MusterAGOrderManagement.Mapping
     {
         public static CustomerItemModel ToModel(this CustomerDto customerDto)
         {
+            if (customerDto == null)
+                return null;
+
             CustomerItemModel customerModel = new CustomerItemModel();
             customerModel.Id = customerDto.Id;
             customerModel.Name = customerDto.Name;
@@ -14,12 +17,16 @@ namespace MusterAGOrderManagement.Mapping
             customerModel.Website = customerDto.Website;
             customerModel.Password = customerDto.Password;
             customerModel.AddressId = customerDto.AddressId;
+            customerModel.Address = customerDto.Address.ToModel();
 
             return customerModel;
         }
 
         public static CustomerDto ToDto(this CustomerItemModel customerModel)
         {
+            if (customerModel == null)
+                return null;
+
             CustomerDto customerDto = new CustomerDto();
             customerDto.Id = customerModel.Id;
             customerDto.Name = customerModel.Name;
@@ -27,6 +34,7 @@ namespace MusterAGOrderManagement.Mapping
             customerDto.Website = customerModel.Website;
             customerDto.Password = customerModel.Password;
             customerDto.AddressId = customerModel.AddressId;
+            customerDto.Address = customerModel.Address.ToDto();
 
             return customerDto;
         }

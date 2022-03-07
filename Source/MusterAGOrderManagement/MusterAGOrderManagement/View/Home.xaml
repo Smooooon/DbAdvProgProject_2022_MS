@@ -10,8 +10,7 @@
         <TabControl>
             <TabItem Header="Home">
                 <Grid Background="#FFE5E5E5">
-                    <CheckBox Content="Datenbankverbindung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="{Binding IsDatabaseConnected}"/>
-
+                    <TextBlock Margin="20 0 0 0" Text="Willkomemn" FontSize="50"></TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="ArticleGroup">

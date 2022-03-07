@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
 using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
@@ -58,7 +59,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                addressDtoList = context.Addresses.ToList();
+                addressDtoList = context.Addresses.Include("Town").ToList();
 
                 return addressDtoList;
             }

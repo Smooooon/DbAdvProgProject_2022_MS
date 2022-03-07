@@ -28,8 +28,8 @@
                   Grid.Column="0" Grid.Row="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="0.2*"/>
-                <DataGridTextColumn Header="Preis" Binding="{Binding ArticleId}" Width="0.1*"/>
-                <DataGridTextColumn Header="Artikel-Gruppe" Binding="{Binding OrderId}" Width="0.3*"/>
+                <DataGridTextColumn Header="Artikel" Binding="{Binding Article.Name}" Width="0.2*"/>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order.Id}" Width="0.2*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">

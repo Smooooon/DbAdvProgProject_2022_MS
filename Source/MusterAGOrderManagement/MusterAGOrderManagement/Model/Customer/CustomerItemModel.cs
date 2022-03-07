@@ -1,4 +1,6 @@
-﻿namespace MusterAGOrderManagement.Model.Customer
+﻿using MusterAGOrderManagement.Model.Address;
+
+namespace MusterAGOrderManagement.Model.Customer
 {
     internal class CustomerItemModel
     {
@@ -8,6 +10,6 @@
         public string? Website { get; set; }
         public string? Password { get; set; }
         public int AddressId { get; set; }
-        //public virtual AddressDao Address { get; set; }
+        public AddressItemModel Address { get; set; }
     }
 }

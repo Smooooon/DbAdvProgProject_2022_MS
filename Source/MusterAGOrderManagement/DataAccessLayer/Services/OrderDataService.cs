@@ -1,4 +1,5 @@
-﻿using MusterAG.DataAccessLayer.Dao;
+﻿using Microsoft.EntityFrameworkCore;
+using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
 {
@@ -57,20 +58,23 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                orderDtoList = context.Orders.ToList();
+                orderDtoList = context.Orders.Include("Customer").Include("Positions").ToList();
 
                 return orderDtoList;
             }
         }
 
-        public OrderDao Update(OrderDao OrderDao)
+        public OrderDao Update(OrderDao orderDao)
         {
+            //Objekt ignorieren
+            orderDao.Customer = null;
+
             using (DataContext context = new DataContext())
             {
-                context.Update(OrderDao);
+                context.Update(orderDao);
                 context.SaveChanges();
 
-                return OrderDao;
+                return orderDao;
             }
         }
     }

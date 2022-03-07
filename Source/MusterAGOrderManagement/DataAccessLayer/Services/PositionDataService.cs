@@ -1,4 +1,5 @@
-﻿using MusterAG.DataAccessLayer.Dao;
+﻿using Microsoft.EntityFrameworkCore;
+using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
 {
@@ -57,7 +58,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                positionDtoList = context.Positions.ToList();
+                positionDtoList = context.Positions.Include("Article").Include("Order").ToList();
 
                 return positionDtoList;
             }
@@ -65,6 +66,10 @@ namespace DataAccessLayer.Services
 
         public PositionDao Update(PositionDao positionDao)
         {
+            //Objekt ignorieren
+            positionDao.Article = null;
+            positionDao.Order = null;
+
             using (DataContext context = new DataContext())
             {
                 context.Update(positionDao);

@@ -28,13 +28,13 @@
                   Grid.Column="0" Grid.Row="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Bestelldatum" Binding="{Binding Ordered}" Width="0.3*"/>
-                <DataGridTextColumn Header="Customer" Binding="{Binding CustomerId}" Width="0.2*"/>
+                <DataGridTextColumn Header="Customer" Binding="{Binding Customer.Name}" Width="0.2*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Bestelldatum:"/>
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding SelectedItem.Ordered, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtBestelldatum" TextWrapping="Wrap" Text="{Binding SelectedItem.Ordered, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Customer:" />

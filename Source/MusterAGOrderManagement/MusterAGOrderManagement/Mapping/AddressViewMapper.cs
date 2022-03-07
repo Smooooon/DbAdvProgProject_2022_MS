@@ -7,6 +7,9 @@ namespace MusterAGOrderManagement.Mapping
     {
         public static AddressItemModel ToModel(this AddressDto addressDto)
         {
+            if (addressDto == null)
+                return null;
+
             AddressItemModel addressModel = new AddressItemModel();
             addressModel.Id = addressDto.Id;
             addressModel.Street = addressDto.Street;
@@ -17,6 +20,9 @@ namespace MusterAGOrderManagement.Mapping
 
         public static AddressDto ToDto(this AddressItemModel addressModel)
         {
+            if (addressModel == null)
+                return null;
+
             AddressDto addressDto = new AddressDto();
             addressDto.Id = addressModel.Id;
             addressDto.Street = addressModel.Street;

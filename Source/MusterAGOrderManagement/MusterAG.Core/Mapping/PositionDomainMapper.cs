@@ -7,22 +7,32 @@ namespace MusterAG.BusinessLogic.Mapping
     {
         public static PositionDao ToDao(this PositionDto positionDto)
         {
+            if (positionDto == null)
+                return null;
+
             PositionDao positionDao = new PositionDao();
             positionDao.Id = positionDto.Id;
             positionDao.Quantity = positionDto.Quantity;
             positionDao.ArticleId = positionDto.ArticleId;
             positionDao.OrderId = positionDto.OrderId;
+            positionDao.Article = positionDto.Article.ToDao();
+            positionDao.Order = positionDto.Order.ToDao();
 
             return positionDao;
         }
 
         public static PositionDto ToDto(this PositionDao positionDao)
         {
+            if (positionDao == null)
+                return null;
+
             PositionDto positionDto = new PositionDto();
             positionDto.Id = positionDao.Id;
             positionDto.Quantity = positionDao.Quantity;
             positionDto.ArticleId = positionDao.ArticleId;
             positionDto.OrderId = positionDao.OrderId;
+            positionDto.Article = positionDao.Article.ToDto();
+            positionDto.Order = positionDao.Order.ToDto();
 
             return positionDto;
         }

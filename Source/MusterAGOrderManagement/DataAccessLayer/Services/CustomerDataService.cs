@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
 using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
@@ -58,7 +59,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                customerDtoList = context.Customers.ToList();
+                customerDtoList = context.Customers.Include("Address").ToList();
 
                 return customerDtoList;
             }
@@ -66,6 +67,9 @@ namespace DataAccessLayer.Services
 
         public CustomerDao Update(CustomerDao customerDao)
         {
+            //Objekt ignorieren
+            customerDao.Address = null;
+
             using (DataContext context = new DataContext())
             {
                 context.Update(customerDao);
