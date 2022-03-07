@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MusterAG.Core\MusterAG.BusinessLogic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\Customer\" />
-  </ItemGroup>
-
 </Project>

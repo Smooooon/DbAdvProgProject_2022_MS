@@ -1,6 +1,7 @@
 ﻿using MusterAG.BusinessLogic.Domain;
 using MusterAG.BusinessLogic.Dto;
 using MusterAGOrderManagement.Mapping;
+using MusterAGOrderManagement.Model.Customer;
 using MusterAGOrderManagement.Model.Order;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +13,9 @@ namespace MusterAGOrderManagement.ViewModel.Order
     {
         OrderModel _orderModel = new OrderModel();
         private OrderDomain _orderDomain;
-        //private CustomerDomain _customerDomain;
+        private CustomerDomain _customerDomain;
 
-        //public IList<CustomerItemModel> CustomerList { get; set; }
+        public IList<CustomerItemModel> CustomerList { get; set; }
 
         public ObservableCollection<OrderItemModel> OrderList
         {
@@ -72,12 +73,12 @@ namespace MusterAGOrderManagement.ViewModel.Order
         public OrderViewModel()
         {
             _orderDomain = new OrderDomain();
-            //_customerDomain = new CustomerDomain();
-            //CustomerList = new List<CustomerItemModel>();
-            //IList<CustomerDto> customers = _customerDomain.GetCustomers();
+            _customerDomain = new CustomerDomain();
+            CustomerList = new List<CustomerItemModel>();
+            IList<CustomerDto> customers = _customerDomain.GetCustomers();
 
-            //foreach (CustomerDto customerDto in customers)
-            //    CustomerList.Add(customerDto.ToModel());
+            foreach (CustomerDto customerDto in customers)
+                CustomerList.Add(customerDto.ToModel());
 
             RefreshOrderList();
         }
