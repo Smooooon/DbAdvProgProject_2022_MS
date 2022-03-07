@@ -1,6 +1,7 @@
 ﻿using MusterAG.BusinessLogic.Domain;
 using MusterAG.BusinessLogic.Dto;
 using MusterAGOrderManagement.Mapping;
+using MusterAGOrderManagement.Model.Address;
 using MusterAGOrderManagement.Model.Customer;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +13,9 @@ namespace MusterAGOrderManagement.ViewModel.Customer
     {
         CustomerModel _customerModel = new CustomerModel();
         private CustomerDomain _customerDomain;
-        //private AddressGroupDomain _addressGroupDomain;
+        private AddressDomain _addressDomain;
 
-        //public IList<AddressGroupItemModel> AddressList { get; set; }
+        public IList<AddressItemModel> AddressList { get; set; }
 
         public ObservableCollection<CustomerItemModel> CustomerList
         {
@@ -72,12 +73,12 @@ namespace MusterAGOrderManagement.ViewModel.Customer
         public CustomerViewModel()
         {
             _customerDomain = new CustomerDomain();
-            //_addressGroupDomain = new AddressGroupDomain();
-            //AddressList = new List<AddressGroupItemModel>();
-            //IList<AddressGroupDto> addressGroups = _addressGroupDomain.GetAddressGroups();
+            _addressDomain = new AddressDomain();
+            AddressList = new List<AddressItemModel>();
+            IList<AddressDto> addresses = _addressDomain.GetAddresses();
 
-            //foreach (AddressGroupDto addressGroupDto in addressGroups)
-            //    AddressList.Add(addressGroupDto.ToModel());
+            foreach (AddressDto addressDto in addresses)
+                AddressList.Add(addressDto.ToModel());
 
             RefreshCustomerList();
         }

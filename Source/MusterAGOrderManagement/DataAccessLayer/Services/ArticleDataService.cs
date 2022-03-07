@@ -3,7 +3,7 @@ using MusterAG.DataAccessLayer.Dao;
 
 namespace DataAccessLayer.Services
 {
-    public class ArticleDataService //: IArticleDataService
+    public class ArticleDataService
     {
 
         public ArticleDataService()

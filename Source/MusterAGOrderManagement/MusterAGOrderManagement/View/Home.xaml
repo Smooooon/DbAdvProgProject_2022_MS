@@ -29,6 +29,9 @@
             <TabItem Header="Customer">
                 <localviews:Customer/>
             </TabItem>
+            <TabItem Header="Address">
+                <localviews:Address/>
+            </TabItem>
         </TabControl>
 
     </Grid>

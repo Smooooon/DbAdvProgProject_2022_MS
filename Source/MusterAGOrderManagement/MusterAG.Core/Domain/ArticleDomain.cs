@@ -1,13 +1,7 @@
 ﻿using DataAccessLayer.Services;
-using MusterAG.BusinessLogic.DataAccess;
 using MusterAG.BusinessLogic.Dto;
 using MusterAG.BusinessLogic.Mapping;
 using MusterAG.DataAccessLayer.Dao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusterAG.BusinessLogic.Domain
 {
