@@ -12,9 +12,8 @@ namespace MusterAGOrderManagement.ViewModel.Address
     {
         AddressModel _addressModel = new AddressModel();
         private AddressDomain _addressDomain;
-        //private ArticleGroupDomain _articleGroupDomain;
 
-        //public IList<ArticleGroupItemModel> ArticleGroupList { get; set; }
+        public IList<TownItemModel> TownList { get; set; }
 
         public ObservableCollection<AddressItemModel> AddressList
         {
@@ -72,12 +71,11 @@ namespace MusterAGOrderManagement.ViewModel.Address
         public AddressViewModel()
         {
             _addressDomain = new AddressDomain();
-            //_articleGroupDomain = new ArticleGroupDomain();
-            //ArticleGroupList = new List<ArticleGroupItemModel>();
-            //IList<ArticleGroupDto> articleGroups = _articleGroupDomain.GetArticleGroups();
+            TownList = new List<TownItemModel>();
+            IList<TownDto> towns = _addressDomain.GetTowns();
 
-            //foreach (ArticleGroupDto articleGroupDto in articleGroups)
-            //    ArticleGroupList.Add(articleGroupDto.ToModel());
+            foreach (TownDto townDto in towns)
+                TownList.Add(townDto.ToModel());
 
             RefreshAddressList();
         }

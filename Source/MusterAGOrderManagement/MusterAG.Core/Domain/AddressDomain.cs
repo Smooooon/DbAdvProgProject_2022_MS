@@ -51,5 +51,17 @@ namespace MusterAG.BusinessLogic.Domain
         {
             return _addressDataService.Delete(addressIdToDelete);
         }
+
+        public IList<TownDto> GetTowns()
+        {
+            IList<TownDto> townDtoList = new List<TownDto>();
+
+            IList<TownDao> townDaoList = _addressDataService.GetAllTown();
+
+            foreach (TownDao townDao in townDaoList)
+                townDtoList.Add(townDao.ToDto());
+
+            return townDtoList;
+        }
     }
 }

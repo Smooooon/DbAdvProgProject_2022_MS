@@ -75,5 +75,17 @@ namespace DataAccessLayer.Services
                 return addressDao;
             }
         }
+
+        public IList<TownDao> GetAllTown()
+        {
+            IList<TownDao> townDtoList;
+
+            using (DataContext context = new DataContext())
+            {
+                townDtoList = context.Towns.Include("Country").ToList();
+
+                return townDtoList;
+            }
+        }
     }
 }

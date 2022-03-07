@@ -14,6 +14,7 @@ namespace MusterAG.BusinessLogic.Mapping
             addressDao.Id = addressDto.Id;
             addressDao.Street = addressDto.Street;
             addressDao.TownId = addressDto.TownId;
+            addressDao.Town = addressDto.Town.ToDao();
 
             return addressDao;
         }
@@ -27,6 +28,7 @@ namespace MusterAG.BusinessLogic.Mapping
             addressDto.Id = addressDao.Id;
             addressDto.Street = addressDao.Street;
             addressDto.TownId = addressDao.TownId;
+            addressDto.Town = addressDao.Town.ToDto();
 
             return addressDto;
         }

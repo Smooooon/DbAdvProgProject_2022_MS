@@ -14,6 +14,7 @@ namespace MusterAGOrderManagement.Mapping
             addressModel.Id = addressDto.Id;
             addressModel.Street = addressDto.Street;
             addressModel.TownId = addressDto.TownId;
+            addressModel.Town = addressDto.Town.ToModel();
 
             return addressModel;
         }
@@ -27,6 +28,7 @@ namespace MusterAGOrderManagement.Mapping
             addressDto.Id = addressModel.Id;
             addressDto.Street = addressModel.Street;
             addressDto.TownId = addressModel.TownId;
+            addressDto.Town = addressModel.Town.ToDto();
 
             return addressDto;
         }
