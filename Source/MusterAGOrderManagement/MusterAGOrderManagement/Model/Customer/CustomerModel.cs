@@ -2,9 +2,27 @@
 
 namespace MusterAGOrderManagement.Model.Customer
 {
-    internal class CustomerModel
+    internal class CustomerModel : BaseModel
     {
-        public ObservableCollection<CustomerItemModel>? Customers { get; set; }
-        public CustomerItemModel SelectedItem { get; set; }
+        private ObservableCollection<CustomerItemModel>? _customers { get; set; }
+        public ObservableCollection<CustomerItemModel> Customers
+        {
+            get { return _customers; }
+            set
+            {
+                _customers = value;
+                OnPropertyChanged();
+            }
+        }
+        private CustomerItemModel _selectedItem { get; set; }
+        public CustomerItemModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

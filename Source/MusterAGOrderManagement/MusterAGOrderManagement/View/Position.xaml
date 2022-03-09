@@ -18,8 +18,8 @@
 
 
         <DataGrid x:Name="DataGridPosition"
-                  ItemsSource="{Binding PositionList}" 
-                  SelectedItem="{Binding SelectedItem}"
+                  ItemsSource="{Binding PositionModel.Positions}" 
+                  SelectedItem="{Binding PositionModel.SelectedItem}"
                   AlternatingRowBackground="LightGray"
                   CanUserDeleteRows="False"
                   CanUserAddRows="False"
@@ -35,20 +35,24 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Quantity:"/>
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding PositionModel.SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Artikel:" />
-                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding SelectedItem.ArticleId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding ArticleList}"/>
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.ArticleId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding ArticleList}"/>
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Order:" />
-                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding SelectedItem.OrderId}" DisplayMemberPath="Id" SelectedValuePath="Id" ItemsSource="{Binding OrderList}"/>
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.OrderId}" DisplayMemberPath="Id" SelectedValuePath="Id" ItemsSource="{Binding OrderList}"/>
             </WrapPanel>
             <WrapPanel Margin="0 10 0 0">
-                <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding SelectedItem}" Content="Add New Row"/>
-                <Button Width="90" Margin="0 0 10 0" HorizontalAlignment="Center" Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding PositionList}" Content="Save All"/>
-                <Button Width="90" Margin="0 0 10 0" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding SelectedItem}" Content="Delete"/>
+                <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding PositionModel.SelectedItem}" Content="Add New Row"/>
+                <Button Width="90" Margin="0 0 10 0" HorizontalAlignment="Center" Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding PositionModel.Positions}" Content="Save All"/>
+                <Button Width="90" Margin="0 0 10 0" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding PositionModel.SelectedItem}" Content="Delete"/>
+            </WrapPanel>
+            <WrapPanel Margin="0 10 0 0">
+                <TextBlock Text="Search:" Height="40" Width="175"/>
+                <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="175"/>
             </WrapPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10 10 0 0" Grid.ColumnSpan="2">

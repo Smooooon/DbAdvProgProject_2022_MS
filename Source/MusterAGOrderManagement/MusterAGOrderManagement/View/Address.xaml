@@ -18,8 +18,8 @@
 
 
         <DataGrid x:Name="DataGridAddress"
-                  ItemsSource="{Binding AddressList}" 
-                  SelectedItem="{Binding SelectedItem}"
+                  ItemsSource="{Binding AddressModel.Addresses}" 
+                  SelectedItem="{Binding AddressModel.SelectedItem}"
                   AlternatingRowBackground="LightGray"
                   CanUserDeleteRows="False"
                   CanUserAddRows="False"
@@ -35,16 +35,20 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Strasse:"/>
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding SelectedItem.Street, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding AddressModel.SelectedItem.Street, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Ort:" />
-                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding SelectedItem.TownId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding TownList}"/>
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding AddressModel.SelectedItem.TownId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding TownList}"/>
             </WrapPanel>
             <WrapPanel Margin="0 10 0 0">
-                <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding SelectedItem}" Content="Add New Row"/>
-                <Button Width="90" Margin="0 0 10 0" HorizontalAlignment="Center" Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding AddressList}" Content="Save All"/>
-                <Button Width="90" Margin="0 0 10 0" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding SelectedItem}" Content="Delete"/>
+                <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding AddressModel.SelectedItem}" Content="Add New Row"/>
+                <Button Width="90" Margin="0 0 10 0" HorizontalAlignment="Center" Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding AddressModel.Addresses}" Content="Save All"/>
+                <Button Width="90" Margin="0 0 10 0" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding AddressModel.SelectedItem}" Content="Delete"/>
+            </WrapPanel>
+            <WrapPanel Margin="0 10 0 0">
+                <TextBlock Text="Search:" Height="40" Width="175"/>
+                <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="175"/>
             </WrapPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10 10 0 0" Grid.ColumnSpan="2">

@@ -57,7 +57,7 @@ namespace MusterAGOrderManagement.ViewModel.Position
             newSelectedItem.OrderId = newItem.OrderId;
             newSelectedItem.ArticleId = newItem.ArticleId;
 
-            _positionViewModel.SelectedItem = newSelectedItem;
+            _positionViewModel.PositionModel.SelectedItem = newSelectedItem;
         }
     }
 }

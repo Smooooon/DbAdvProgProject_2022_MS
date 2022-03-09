@@ -2,9 +2,27 @@
 
 namespace MusterAGOrderManagement.Model.ArticleGroup
 {
-    internal class ArticleGroupModel
+    internal class ArticleGroupModel : BaseModel
     {
-        public ObservableCollection<ArticleGroupItemModel>? ArticleGroups { get; set; }
-        public ArticleGroupItemModel SelectedItem { get; set; }
+        private ObservableCollection<ArticleGroupItemModel>? _articleGroups { get; set; }
+        public ObservableCollection<ArticleGroupItemModel> ArticleGroups
+        {
+            get { return _articleGroups; }
+            set
+            {
+                _articleGroups = value;
+                OnPropertyChanged();
+            }
+        }
+        private ArticleGroupItemModel _selectedItem { get; set; }
+        public ArticleGroupItemModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

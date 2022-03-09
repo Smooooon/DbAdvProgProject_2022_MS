@@ -55,7 +55,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
             newSelectedItem.Name = newItem.Name;
             newSelectedItem.HigherLevelArticleGroupId = newItem.HigherLevelArticleGroupId;
 
-            _articleGroupViewModel.SelectedItem = newSelectedItem;
+            _articleGroupViewModel.ArticleGroupModel.SelectedItem = newSelectedItem;
         }
     }
 }

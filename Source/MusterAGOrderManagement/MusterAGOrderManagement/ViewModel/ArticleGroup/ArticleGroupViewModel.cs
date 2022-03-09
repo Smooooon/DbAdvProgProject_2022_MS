@@ -4,36 +4,15 @@ using MusterAGOrderManagement.Mapping;
 using MusterAGOrderManagement.Model.ArticleGroup;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.ArticleGroup
 {
     internal class ArticleGroupViewModel : BaseViewModel
     {
-        ArticleGroupModel _articleGroupModel = new ArticleGroupModel();
+        public  ArticleGroupModel ArticleGroupModel { get; set; }
         private ArticleGroupDomain _articleGroupDomain;
-
-        //public IList<ArticleGroupItemModel> ArticleGroupList { get; set; }
-
-        public ObservableCollection<ArticleGroupItemModel> ArticleGroupList
-        {
-            get { return _articleGroupModel.ArticleGroups; }
-            set
-            {
-                _articleGroupModel.ArticleGroups = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ArticleGroupItemModel SelectedItem
-        {
-            get { return _articleGroupModel.SelectedItem; }
-            set
-            {
-                _articleGroupModel.SelectedItem = value;
-                OnPropertyChanged();
-            }
-        }
 
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
@@ -70,22 +49,35 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
 
         public ArticleGroupViewModel()
         {
+            ArticleGroupModel = new ArticleGroupModel();
             _articleGroupDomain = new ArticleGroupDomain();
 
             RefreshArticleList();
+
+            ItemsView = CollectionViewSource.GetDefaultView(ArticleGroupModel.ArticleGroups);
+            ItemsView.Filter = x => Filter(x as ArticleGroupItemModel);
+        }
+
+        private bool Filter(ArticleGroupItemModel itemModel)
+        {
+            var searchstring = (SearchString ?? string.Empty).ToLower();
+
+            return itemModel != null &&
+                 ((itemModel.Name ?? string.Empty).ToLower().Contains(searchstring) ||
+                  (itemModel.HigherLevelArticleGroup?.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
         public void RefreshArticleList()
         {
             IList<ArticleGroupDto> articleGroupDtoList = _articleGroupDomain.GetArticleGroups();
 
-            if (ArticleGroupList != null)
-                ArticleGroupList.Clear();
+            if (ArticleGroupModel.ArticleGroups != null)
+                ArticleGroupModel.ArticleGroups.Clear();
             else
-                ArticleGroupList = new ObservableCollection<ArticleGroupItemModel>();
+                ArticleGroupModel.ArticleGroups = new ObservableCollection<ArticleGroupItemModel>();
 
             foreach (ArticleGroupDto articleGroupDto in articleGroupDtoList)
-                ArticleGroupList.Add(articleGroupDto.ToModel());
+                ArticleGroupModel.ArticleGroups.Add(articleGroupDto.ToModel());
         }
     }
 }

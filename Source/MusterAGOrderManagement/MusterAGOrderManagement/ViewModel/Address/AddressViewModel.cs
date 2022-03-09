@@ -4,36 +4,17 @@ using MusterAGOrderManagement.Mapping;
 using MusterAGOrderManagement.Model.Address;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.Address
 {
     internal class AddressViewModel : BaseViewModel
     {
-        AddressModel _addressModel = new AddressModel();
+        public AddressModel AddressModel { get; set; }
         private AddressDomain _addressDomain;
 
         public IList<TownItemModel> TownList { get; set; }
-
-        public ObservableCollection<AddressItemModel> AddressList
-        {
-            get { return _addressModel.Addresses; }
-            set
-            {
-                _addressModel.Addresses = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public AddressItemModel SelectedItem
-        {
-            get { return _addressModel.SelectedItem; }
-            set
-            {
-                _addressModel.SelectedItem = value;
-                OnPropertyChanged();
-            }
-        }
 
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
@@ -70,6 +51,7 @@ namespace MusterAGOrderManagement.ViewModel.Address
 
         public AddressViewModel()
         {
+            AddressModel = new AddressModel();
             _addressDomain = new AddressDomain();
             TownList = new List<TownItemModel>();
             IList<TownDto> towns = _addressDomain.GetTowns();
@@ -78,19 +60,31 @@ namespace MusterAGOrderManagement.ViewModel.Address
                 TownList.Add(townDto.ToModel());
 
             RefreshAddressList();
+
+            ItemsView = CollectionViewSource.GetDefaultView(AddressModel.Addresses);
+            ItemsView.Filter = x => Filter(x as AddressItemModel);
+        }
+
+        private bool Filter(AddressItemModel itemModel)
+        {
+            var searchstring = (SearchString ?? string.Empty).ToLower();
+
+            return itemModel != null &&
+                 ((itemModel.Street ?? string.Empty).ToLower().Contains(searchstring) ||
+                  (itemModel.Town.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
         public void RefreshAddressList()
         {
             IList<AddressDto> addressDtoList = _addressDomain.GetAddresses();
 
-            if (AddressList != null)
-                AddressList.Clear();
+            if (AddressModel.Addresses != null)
+                AddressModel.Addresses.Clear();
             else
-                AddressList = new ObservableCollection<AddressItemModel>();
+                AddressModel.Addresses = new ObservableCollection<AddressItemModel>();
 
             foreach (AddressDto addressDto in addressDtoList)
-                AddressList.Add(addressDto.ToModel());
+                AddressModel.Addresses.Add(addressDto.ToModel());
         }
     }
 }

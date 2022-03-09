@@ -6,39 +6,20 @@ using MusterAGOrderManagement.Model.Order;
 using MusterAGOrderManagement.Model.Position;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.Position
 {
     internal class PositionViewModel : BaseViewModel
     {
-        PositionModel _positionModel = new PositionModel();
+        public PositionModel PositionModel { get; set; }
         private PositionDomain _positionDomain;
         private ArticleDomain _articleDomain;
         private OrderDomain _orderDomain;
 
         public IList<ArticleItemModel> ArticleList { get; set; }
         public IList<OrderItemModel> OrderList { get; set; }
-
-        public ObservableCollection<PositionItemModel> PositionList
-        {
-            get { return _positionModel.Positions; }
-            set
-            {
-                _positionModel.Positions = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public PositionItemModel SelectedItem
-        {
-            get { return _positionModel.SelectedItem; }
-            set
-            {
-                _positionModel.SelectedItem = value;
-                OnPropertyChanged();
-            }
-        }
 
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
@@ -75,6 +56,7 @@ namespace MusterAGOrderManagement.ViewModel.Position
 
         public PositionViewModel()
         {
+            PositionModel = new PositionModel();
             _positionDomain = new PositionDomain();
 
             //Artikel
@@ -94,19 +76,32 @@ namespace MusterAGOrderManagement.ViewModel.Position
                 OrderList.Add(orderDto.ToModel());
 
             RefreshPositionList();
+
+            ItemsView = CollectionViewSource.GetDefaultView(PositionModel.Positions);
+            ItemsView.Filter = x => Filter(x as PositionItemModel);
+        }
+
+        private bool Filter(PositionItemModel itemModel)
+        {
+            var searchstring = (SearchString ?? string.Empty).ToLower();
+
+            return itemModel != null &&
+                 (itemModel.Quantity.ToString().ToLower().Contains(searchstring) ||
+                  (itemModel.Article.Name ?? string.Empty).ToLower().Contains(searchstring) ||
+                  (itemModel.Order.Id.ToString().ToLower().Contains(searchstring)));
         }
 
         public void RefreshPositionList()
         {
             IList<PositionDto> positionDtoList = _positionDomain.GetPositions();
 
-            if (PositionList != null)
-                PositionList.Clear();
+            if (PositionModel.Positions != null)
+                PositionModel.Positions.Clear();
             else
-                PositionList = new ObservableCollection<PositionItemModel>();
+                PositionModel.Positions = new ObservableCollection<PositionItemModel>();
 
             foreach (PositionDto positionDto in positionDtoList)
-                PositionList.Add(positionDto.ToModel());
+                PositionModel.Positions.Add(positionDto.ToModel());
         }
     }
 }

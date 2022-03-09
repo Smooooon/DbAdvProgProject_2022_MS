@@ -55,7 +55,7 @@ namespace MusterAGOrderManagement.ViewModel.Address
             newSelectedItem.Street = newItem.Street;
             newSelectedItem.TownId = newItem.TownId;
 
-            _addressViewModel.SelectedItem = newSelectedItem;
+            _addressViewModel.AddressModel.SelectedItem = newSelectedItem;
         }
     }
 }

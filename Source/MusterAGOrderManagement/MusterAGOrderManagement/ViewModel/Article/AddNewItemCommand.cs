@@ -57,7 +57,7 @@ namespace MusterAGOrderManagement.Article.ViewModel
             newSelectedItem.Price = newItem.Price;
             newSelectedItem.ArticleGroupId = newItem.ArticleGroupId;
 
-            _articleViewModel.SelectedItem = newSelectedItem;
+            _articleViewModel.ArticleModel.SelectedItem = newSelectedItem;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace MusterAGOrderManagement.ViewModel.Order
             newSelectedItem.Ordered = newItem.Ordered;
             newSelectedItem.CustomerId = newItem.CustomerId;
 
-            _orderViewModel.SelectedItem = newSelectedItem;
+            _orderViewModel.OrderModel.SelectedItem = newSelectedItem;
         }
     }
 }

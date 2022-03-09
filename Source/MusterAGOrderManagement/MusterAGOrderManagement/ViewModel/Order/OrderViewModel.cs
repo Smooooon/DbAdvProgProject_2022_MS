@@ -5,37 +5,18 @@ using MusterAGOrderManagement.Model.Customer;
 using MusterAGOrderManagement.Model.Order;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.Order
 {
     internal class OrderViewModel : BaseViewModel
     {
-        OrderModel _orderModel = new OrderModel();
+        public OrderModel OrderModel { get; set; }
         private OrderDomain _orderDomain;
         private CustomerDomain _customerDomain;
 
         public IList<CustomerItemModel> CustomerList { get; set; }
-
-        public ObservableCollection<OrderItemModel> OrderList
-        {
-            get { return _orderModel.Orders; }
-            set
-            {
-                _orderModel.Orders = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public OrderItemModel SelectedItem
-        {
-            get { return _orderModel.SelectedItem; }
-            set
-            {
-                _orderModel.SelectedItem = value;
-                OnPropertyChanged();
-            }
-        }
 
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
@@ -72,6 +53,7 @@ namespace MusterAGOrderManagement.ViewModel.Order
 
         public OrderViewModel()
         {
+            OrderModel = new OrderModel();
             _orderDomain = new OrderDomain();
             _customerDomain = new CustomerDomain();
             CustomerList = new List<CustomerItemModel>();
@@ -81,19 +63,31 @@ namespace MusterAGOrderManagement.ViewModel.Order
                 CustomerList.Add(customerDto.ToModel());
 
             RefreshOrderList();
+
+            ItemsView = CollectionViewSource.GetDefaultView(OrderModel.Orders);
+            ItemsView.Filter = x => Filter(x as OrderItemModel);
+        }
+
+        private bool Filter(OrderItemModel itemModel)
+        {
+            var searchstring = (SearchString ?? string.Empty).ToLower();
+
+            return itemModel != null &&
+                 (itemModel.Ordered.ToString().ToLower().Contains(searchstring) ||
+                  (itemModel.Customer.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
         public void RefreshOrderList()
         {
             IList<OrderDto> orderDtoList = _orderDomain.GetOrders();
 
-            if (OrderList != null)
-                OrderList.Clear();
+            if (OrderModel.Orders != null)
+                OrderModel.Orders.Clear();
             else
-                OrderList = new ObservableCollection<OrderItemModel>();
+                OrderModel.Orders = new ObservableCollection<OrderItemModel>();
 
             foreach (OrderDto orderDto in orderDtoList)
-                OrderList.Add(orderDto.ToModel());
+                OrderModel.Orders.Add(orderDto.ToModel());
         }
     }
 }

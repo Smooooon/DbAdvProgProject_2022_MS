@@ -61,7 +61,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
             newSelectedItem.Password = newItem.Password;
             newSelectedItem.AddressId = newItem.AddressId;
 
-            _customerViewModel.SelectedItem = newSelectedItem;
+            _customerViewModel.CustomerModel.SelectedItem = newSelectedItem;
         }
     }
 }

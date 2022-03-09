@@ -5,37 +5,18 @@ using MusterAGOrderManagement.Model.Address;
 using MusterAGOrderManagement.Model.Customer;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.Customer
 {
     internal class CustomerViewModel : BaseViewModel
     {
-        CustomerModel _customerModel = new CustomerModel();
+        public CustomerModel CustomerModel { get; set; }
         private CustomerDomain _customerDomain;
         private AddressDomain _addressDomain;
 
         public IList<AddressItemModel> AddressList { get; set; }
-
-        public ObservableCollection<CustomerItemModel> CustomerList
-        {
-            get { return _customerModel.Customers; }
-            set
-            {
-                _customerModel.Customers = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public CustomerItemModel SelectedItem
-        {
-            get { return _customerModel.SelectedItem; }
-            set
-            {
-                _customerModel.SelectedItem = value;
-                OnPropertyChanged();
-            }
-        }
 
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
@@ -72,6 +53,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
 
         public CustomerViewModel()
         {
+            CustomerModel = new CustomerModel();
             _customerDomain = new CustomerDomain();
             _addressDomain = new AddressDomain();
             AddressList = new List<AddressItemModel>();
@@ -81,19 +63,33 @@ namespace MusterAGOrderManagement.ViewModel.Customer
                 AddressList.Add(addressDto.ToModel());
 
             RefreshCustomerList();
+
+            ItemsView = CollectionViewSource.GetDefaultView(CustomerModel.Customers);
+            ItemsView.Filter = x => Filter(x as CustomerItemModel);
+        }
+
+        private bool Filter(CustomerItemModel itemModel)
+        {
+            var searchstring = (SearchString ?? string.Empty).ToLower();
+
+            return itemModel != null &&
+                 ((itemModel.Name ?? string.Empty).ToLower().Contains(searchstring) ||
+                 (itemModel.Email ?? string.Empty).ToLower().Contains(searchstring) ||
+                 (itemModel.Website ?? string.Empty).ToLower().Contains(searchstring) ||
+                  (itemModel.Address.Street ?? string.Empty).ToLower().Contains(searchstring));
         }
 
         public void RefreshCustomerList()
         {
             IList<CustomerDto> customerDtoList = _customerDomain.GetCustomers();
 
-            if (CustomerList != null)
-                CustomerList.Clear();
+            if (CustomerModel.Customers != null)
+                CustomerModel.Customers.Clear();
             else
-                CustomerList = new ObservableCollection<CustomerItemModel>();
+                CustomerModel.Customers = new ObservableCollection<CustomerItemModel>();
 
             foreach (CustomerDto customerDto in customerDtoList)
-                CustomerList.Add(customerDto.ToModel());
+                CustomerModel.Customers.Add(customerDto.ToModel());
         }
     }
 }

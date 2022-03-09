@@ -2,9 +2,27 @@
 
 namespace MusterAGOrderManagement.Model.Address
 {
-    internal class AddressModel
+    internal class AddressModel : BaseModel
     {
-        public ObservableCollection<AddressItemModel>? Addresses { get; set; }
-        public AddressItemModel SelectedItem { get; set; }
+        private ObservableCollection<AddressItemModel>? _addresses { get; set; }
+        public ObservableCollection<AddressItemModel> Addresses
+        {
+            get { return _addresses; }
+            set
+            {
+                _addresses = value;
+                OnPropertyChanged();
+            }
+        }
+        private AddressItemModel _selectedItem { get; set; }
+        public AddressItemModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

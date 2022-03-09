@@ -6,24 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusterAGOrderManagement.ViewModel
+namespace MusterAGOrderManagement.Model
 {
-    internal class BaseViewModel : INotifyPropertyChanged
+    internal class BaseModel : INotifyPropertyChanged
     {
-        public ICollectionView ItemsView { get; set; }
-
-        private string _searchString;
-        public string SearchString
-        {
-            get { return _searchString; }
-            set
-            {
-                _searchString = value;
-                OnPropertyChanged();
-                ItemsView.Refresh();
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string property = "")
