@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MusterAGOrderManagement.Model.ArticleGroup;
 
 namespace MusterAGOrderManagement.Model.Article
 {
@@ -12,5 +8,6 @@ namespace MusterAGOrderManagement.Model.Article
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int ArticleGroupId { get; set; }
+        public ArticleGroupItemModel ArticleGroup { get; set; }
     }
 }

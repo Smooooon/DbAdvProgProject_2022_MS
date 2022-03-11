@@ -1,13 +1,7 @@
 ﻿using DataAccessLayer.Services;
-using MusterAG.BusinessLogic.DataAccess;
 using MusterAG.BusinessLogic.Dto;
 using MusterAG.BusinessLogic.Mapping;
 using MusterAG.DataAccessLayer.Dao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusterAG.BusinessLogic.Domain
 {
@@ -44,12 +38,12 @@ namespace MusterAG.BusinessLogic.Domain
             return success;
         }
 
-        public bool CreateArticle(ArticleDto articleDto)
+        public ArticleDto CreateArticle(ArticleDto articleDto)
         {
             ArticleDao articleDao = articleDto.ToDao();
             ArticleDao createdArticleDao = _articleDataService.Create(articleDao);
 
-            return createdArticleDao != null;
+            return createdArticleDao.ToDto();
         }
 
         public bool DeleteArticle(int articleIdToDelete)

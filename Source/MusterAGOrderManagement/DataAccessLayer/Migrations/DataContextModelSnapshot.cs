@@ -39,6 +39,8 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TownId");
+
                     b.ToTable("Addresses");
 
                     b.HasData(
@@ -138,6 +140,9 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ArticleGroupDaoId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("HigherLevelArticleGroupId")
                         .HasColumnType("int");
 
@@ -146,6 +151,8 @@ namespace MusterAG.DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleGroupDaoId");
 
                     b.HasIndex("HigherLevelArticleGroupId");
 
@@ -269,6 +276,16 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
 
@@ -277,6 +294,17 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                        {
+                            ttb
+                                .HasPeriodStart("PeriodStart")
+                                .HasColumnName("PeriodStart");
+                            ttb
+                                .HasPeriodEnd("PeriodEnd")
+                                .HasColumnName("PeriodEnd");
+                        }
+                    ));
 
                     b.HasData(
                         new
@@ -315,6 +343,8 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Orders");
 
                     b.HasData(
@@ -349,9 +379,6 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderDaoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -360,7 +387,9 @@ namespace MusterAG.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderDaoId");
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Positions");
 
@@ -457,10 +486,21 @@ namespace MusterAG.DataAccessLayer.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.AddressDao", b =>
+                {
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.TownDao", "Town")
+                        .WithMany("Addresses")
+                        .HasForeignKey("TownId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Town");
+                });
+
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleDao", b =>
                 {
                     b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", "ArticleGroup")
-                        .WithMany()
+                        .WithMany("Articles")
                         .HasForeignKey("ArticleGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -470,6 +510,10 @@ namespace MusterAG.DataAccessLayer.Migrations
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", b =>
                 {
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", null)
+                        .WithMany()
+                        .HasForeignKey("ArticleGroupDaoId");
+
                     b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", "HigherLevelArticleGroup")
                         .WithMany()
                         .HasForeignKey("HigherLevelArticleGroupId");
@@ -480,7 +524,7 @@ namespace MusterAG.DataAccessLayer.Migrations
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CustomerDao", b =>
                 {
                     b.HasOne("MusterAG.DataAccessLayer.Dao.AddressDao", "Address")
-                        .WithMany()
+                        .WithMany("Customers")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -488,17 +532,40 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
+                {
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.CustomerDao", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.PositionDao", b =>
                 {
-                    b.HasOne("MusterAG.DataAccessLayer.Dao.OrderDao", null)
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.ArticleDao", "Article")
+                        .WithMany()
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusterAG.DataAccessLayer.Dao.OrderDao", "Order")
                         .WithMany("Positions")
-                        .HasForeignKey("OrderDaoId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.TownDao", b =>
                 {
                     b.HasOne("MusterAG.DataAccessLayer.Dao.CountryDao", "Country")
-                        .WithMany("TownDao")
+                        .WithMany("Towns")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -506,14 +573,29 @@ namespace MusterAG.DataAccessLayer.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.AddressDao", b =>
+                {
+                    b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.ArticleGroupDao", b =>
+                {
+                    b.Navigation("Articles");
+                });
+
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.CountryDao", b =>
                 {
-                    b.Navigation("TownDao");
+                    b.Navigation("Towns");
                 });
 
             modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.OrderDao", b =>
                 {
                     b.Navigation("Positions");
+                });
+
+            modelBuilder.Entity("MusterAG.DataAccessLayer.Dao.TownDao", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }

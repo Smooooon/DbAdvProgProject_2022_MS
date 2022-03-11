@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusterAG.DataAccessLayer.Dao
+﻿namespace MusterAG.DataAccessLayer.Dao
 {
     public class ArticleGroupDao : BaseDao
     {
         public string Name { get; set; }
         public int? HigherLevelArticleGroupId { get; set; }
-        public virtual ArticleGroupDao? HigherLevelArticleGroup { get; set; }
+        public virtual ArticleGroupDao HigherLevelArticleGroup { get; set; }
+        //public virtual ICollection<ArticleGroupDao> SameLevelArticleGroup { get; set; }
+        public virtual ICollection<ArticleDao> Articles { get; set; }
     }
 }

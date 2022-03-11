@@ -10,9 +10,9 @@ namespace MusterAG.DataAccessLayer.Dao
     {
         public CountryDao()
         {
-            this.TownDao = new HashSet<TownDao>();
+            this.Towns = new HashSet<TownDao>();
         }
         public string Name { get; set; }
-        public virtual ICollection<TownDao> TownDao { get; set; }
+        public virtual ICollection<TownDao> Towns { get; set; }
     }
 }

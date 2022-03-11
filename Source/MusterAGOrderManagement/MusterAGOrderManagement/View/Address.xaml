@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="MusterAGOrderManagement.View.Address"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MusterAGOrderManagement.View"
+             mc:Ignorable="d" FontSize="20"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+
+
+        <DataGrid x:Name="DataGridAddress"
+                  ItemsSource="{Binding AddressModel.Addresses}" 
+                  SelectedItem="{Binding AddressModel.SelectedItem}"
+                  AlternatingRowBackground="LightGray"
+                  CanUserDeleteRows="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  Grid.Column="0" Grid.Row="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Strasse" Binding="{Binding Street}" Width="0.2*"/>
+                <DataGridTextColumn Header="Ort" Binding="{Binding Town.Name}" Width="0.2*"/>
+                <DataGridTextColumn Header="Land" Binding="{Binding Town.CountryId}" Width="0.2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
+            <WrapPanel>
+                <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Strasse:"/>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175" x:Name="TxtName" TextWrapping="Wrap" Text="{Binding AddressModel.SelectedItem.Street, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </WrapPanel>
+            <WrapPanel>
+                <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Ort:" />
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding AddressModel.SelectedItem.TownId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding TownList}"/>
+            </WrapPanel>
+            <WrapPanel Margin="0 10 0 0">
+                <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding AddressModel.SelectedItem}" Content="Add New Row"/>
+                <Button Width="90" Margin="0 0 10 0" HorizontalAlignment="Center" Command="{Binding SaveAllItemCommand}" CommandParameter="{Binding AddressModel.Addresses}" Content="Save All"/>
+                <Button Width="90" Margin="0 0 10 0" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding AddressModel.SelectedItem}" Content="Delete"/>
+            </WrapPanel>
+            <WrapPanel Margin="0 10 0 0">
+                <TextBlock Text="Search:" Height="40" Width="175"/>
+                <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="175"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="10 10 0 0" Grid.ColumnSpan="2">
+            <TextBlock>Selektiere ein Element um es zu editieren (Save nicht vergessen!) oder zu löschen.</TextBlock>
+            <TextBlock>Die neu hinzugefügte Row muss manuell selectiert werden um sie zu bearbeiten.</TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

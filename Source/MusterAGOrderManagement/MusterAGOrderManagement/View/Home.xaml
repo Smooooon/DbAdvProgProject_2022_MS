@@ -5,17 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusterAGOrderManagement" xmlns:localviews="clr-namespace:MusterAGOrderManagement.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="TabItem">
+            <TabItem Header="Home">
                 <Grid Background="#FFE5E5E5">
-                    <CheckBox Content="Datenbankverbindung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="{Binding IsDatabaseConnected}"/>
-
+                    <TextBlock Margin="20 0 0 0" Text="Willkomemn" FontSize="50"></TextBlock>
                 </Grid>
+            </TabItem>
+            <TabItem Header="ArticleGroup">
+                <localviews:ArticleGroup />
             </TabItem>
             <TabItem Header="Article">
                 <localviews:Article />
+            </TabItem>
+            <TabItem Header="Order">
+                <localviews:Order/>
+            </TabItem>
+            <TabItem Header="Position">
+                <localviews:Position/>
+            </TabItem>
+            <TabItem Header="Customer">
+                <localviews:Customer/>
+            </TabItem>
+            <TabItem Header="Address">
+                <localviews:Address/>
+            </TabItem>
+            <TabItem Header="Rechnung">
+                <localviews:Bill/>
             </TabItem>
         </TabControl>
 

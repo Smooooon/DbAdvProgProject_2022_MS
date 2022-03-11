@@ -19,6 +19,17 @@ namespace DataAccessLayer
             //Weiterer Code
             modelBuilder.Entity<TownDao>().HasKey(t => t.Id);
 
+            //Temporale Tabelle
+            modelBuilder.Entity<CustomerDao>().ToTable(t => t.IsTemporal());
+
+            //Beziehungen
+            modelBuilder.Entity<CustomerDao>().HasOne<AddressDao>(c => c.Address).WithMany(a => a.Customers).HasForeignKey(c => c.AddressId);
+            modelBuilder.Entity<AddressDao>().HasOne<TownDao>(a => a.Town).WithMany(t => t.Addresses).HasForeignKey(a => a.TownId);
+            modelBuilder.Entity<TownDao>().HasOne<CountryDao>(t => t.Country).WithMany(c => c.Towns).HasForeignKey(t => t.CountryId);
+            modelBuilder.Entity<PositionDao>().HasOne<OrderDao>(p => p.Order).WithMany(o => o.Positions).HasForeignKey(p => p.OrderId);
+            modelBuilder.Entity<ArticleDao>().HasOne<ArticleGroupDao>(a => a.ArticleGroup).WithMany(g => g.Articles).HasForeignKey(a => a.ArticleGroupId);
+            modelBuilder.Entity<ArticleGroupDao>().HasOne<ArticleGroupDao>();
+
             //Testdaten
             //Adressen
             modelBuilder.Entity<CountryDao>().HasData(new CountryDao() { Id = 1, Name = "Schweiz" });

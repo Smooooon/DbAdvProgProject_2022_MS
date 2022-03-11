@@ -10,6 +10,20 @@ namespace MusterAGOrderManagement.ViewModel
 {
     internal class BaseViewModel : INotifyPropertyChanged
     {
+        public ICollectionView ItemsView { get; set; }
+
+        private string _searchString;
+        public string SearchString
+        {
+            get { return _searchString; }
+            set
+            {
+                _searchString = value;
+                OnPropertyChanged();
+                ItemsView.Refresh();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string property = "")
