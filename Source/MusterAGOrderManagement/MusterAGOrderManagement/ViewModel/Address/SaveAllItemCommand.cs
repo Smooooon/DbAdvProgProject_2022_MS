@@ -40,7 +40,7 @@ namespace MusterAGOrderManagement.ViewModel.Address
 
                 _addressDomain.UpdateAddresses(addressDtoList);
 
-                _addressViewModel.RefreshAddressList();
+                _addressViewModel.RefreshData();
             }
             else
             {

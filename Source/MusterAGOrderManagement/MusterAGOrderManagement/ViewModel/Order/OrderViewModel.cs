@@ -16,8 +16,6 @@ namespace MusterAGOrderManagement.ViewModel.Order
         private OrderDomain _orderDomain;
         private CustomerDomain _customerDomain;
 
-        public IList<CustomerItemModel> CustomerList { get; set; }
-
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
         {
@@ -56,13 +54,8 @@ namespace MusterAGOrderManagement.ViewModel.Order
             OrderModel = new OrderModel();
             _orderDomain = new OrderDomain();
             _customerDomain = new CustomerDomain();
-            CustomerList = new List<CustomerItemModel>();
-            IList<CustomerDto> customers = _customerDomain.GetCustomers();
 
-            foreach (CustomerDto customerDto in customers)
-                CustomerList.Add(customerDto.ToModel());
-
-            RefreshOrderList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(OrderModel.Orders);
             ItemsView.Filter = x => Filter(x as OrderItemModel);
@@ -77,8 +70,16 @@ namespace MusterAGOrderManagement.ViewModel.Order
                   (itemModel.Customer.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
-        public void RefreshOrderList()
+        public void RefreshData()
         {
+            //CustomerList
+            OrderModel.CustomerList = new ObservableCollection<CustomerItemModel>();
+            IList<CustomerDto> customers = _customerDomain.GetCustomers();
+
+            foreach (CustomerDto customerDto in customers)
+                OrderModel.CustomerList.Add(customerDto.ToModel());
+
+            //Order
             IList<OrderDto> orderDtoList = _orderDomain.GetOrders();
 
             if (OrderModel.Orders != null)

@@ -14,8 +14,6 @@ namespace MusterAGOrderManagement.ViewModel.Address
         public AddressModel AddressModel { get; set; }
         private AddressDomain _addressDomain;
 
-        public IList<TownItemModel> TownList { get; set; }
-
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
         {
@@ -53,13 +51,8 @@ namespace MusterAGOrderManagement.ViewModel.Address
         {
             AddressModel = new AddressModel();
             _addressDomain = new AddressDomain();
-            TownList = new List<TownItemModel>();
-            IList<TownDto> towns = _addressDomain.GetTowns();
 
-            foreach (TownDto townDto in towns)
-                TownList.Add(townDto.ToModel());
-
-            RefreshAddressList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(AddressModel.Addresses);
             ItemsView.Filter = x => Filter(x as AddressItemModel);
@@ -71,11 +64,13 @@ namespace MusterAGOrderManagement.ViewModel.Address
 
             return itemModel != null &&
                  ((itemModel.Street ?? string.Empty).ToLower().Contains(searchstring) ||
-                  (itemModel.Town.Name ?? string.Empty).ToLower().Contains(searchstring));
+                  (itemModel.Town.Name ?? string.Empty).ToLower().Contains(searchstring) ||
+                  (itemModel.Town.Country.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
-        public void RefreshAddressList()
+        public void RefreshData()
         {
+            //Address
             IList<AddressDto> addressDtoList = _addressDomain.GetAddresses();
 
             if (AddressModel.Addresses != null)
@@ -85,6 +80,13 @@ namespace MusterAGOrderManagement.ViewModel.Address
 
             foreach (AddressDto addressDto in addressDtoList)
                 AddressModel.Addresses.Add(addressDto.ToModel());
+
+            //Town
+            AddressModel.TownList = new ObservableCollection<TownItemModel>();
+            IList<TownDto> towns = _addressDomain.GetTowns();
+
+            foreach (TownDto townDto in towns)
+                AddressModel.TownList.Add(townDto.ToModel());
         }
     }
 }

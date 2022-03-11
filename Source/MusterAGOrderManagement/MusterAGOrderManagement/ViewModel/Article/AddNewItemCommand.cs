@@ -49,7 +49,7 @@ namespace MusterAGOrderManagement.Article.ViewModel
             ArticleDto newItemDto = _articleDomain.CreateArticle(articleItemModel.ToDto());
             ArticleItemModel newItem = newItemDto.ToModel();
 
-            _articleViewModel.RefreshArticleList();
+            _articleViewModel.RefreshData();
 
             ArticleItemModel newSelectedItem = new ArticleItemModel();
             newSelectedItem.Id = newItem.Id;

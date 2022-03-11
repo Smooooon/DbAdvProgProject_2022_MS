@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusterAGOrderManagement.Model.ArticleGroup;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,6 +27,17 @@ namespace MusterAGOrderManagement.Model.Article
             set
             {
                 _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<ArticleGroupItemModel> _articleGroupList { get; set; }
+        public ObservableCollection<ArticleGroupItemModel> ArticleGroupList
+        {
+            get { return _articleGroupList; }
+            set
+            {
+                _articleGroupList = value;
                 OnPropertyChanged();
             }
         }

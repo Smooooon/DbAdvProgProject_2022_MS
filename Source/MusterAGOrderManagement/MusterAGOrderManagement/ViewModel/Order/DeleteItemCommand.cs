@@ -30,7 +30,7 @@ namespace MusterAGOrderManagement.ViewModel.Order
                 OrderItemModel orderItemModel = (OrderItemModel)parameter;
                 _orderDomain.DeleteOrder(orderItemModel.Id);
 
-                _orderViewModel.RefreshOrderList();
+                _orderViewModel.RefreshData();
             }
             else
             {

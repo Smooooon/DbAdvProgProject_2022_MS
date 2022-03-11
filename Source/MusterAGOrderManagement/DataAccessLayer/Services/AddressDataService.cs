@@ -59,7 +59,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                addressDtoList = context.Addresses.Include("Town").ToList();
+                addressDtoList = context.Addresses.Include(a => a.Town).ThenInclude(t => t.Country).ToList();
 
                 return addressDtoList;
             }
@@ -67,6 +67,8 @@ namespace DataAccessLayer.Services
 
         public AddressDao Update(AddressDao addressDao)
         {
+            addressDao.Town = null;
+
             using (DataContext context = new DataContext())
             {
                 context.Update(addressDao);

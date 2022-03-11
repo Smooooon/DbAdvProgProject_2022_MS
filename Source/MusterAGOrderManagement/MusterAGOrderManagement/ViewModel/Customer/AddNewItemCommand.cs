@@ -51,7 +51,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
             CustomerDto newItemDto = _customerDomain.CreateCustomer(customerItemModel.ToDto());
             CustomerItemModel newItem = newItemDto.ToModel();
 
-            _customerViewModel.RefreshCustomerList();
+            _customerViewModel.RefreshData();
 
             CustomerItemModel newSelectedItem = new CustomerItemModel();
             newSelectedItem.Id = newItem.Id;

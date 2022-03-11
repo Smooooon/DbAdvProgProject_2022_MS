@@ -39,11 +39,11 @@
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Artikel:" />
-                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.ArticleId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding ArticleList}"/>
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.ArticleId}" DisplayMemberPath="Name" SelectedValuePath="Id" ItemsSource="{Binding PositionModel.ArticleList}"/>
             </WrapPanel>
             <WrapPanel>
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="175" Content="Order:" />
-                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.OrderId}" DisplayMemberPath="Id" SelectedValuePath="Id" ItemsSource="{Binding OrderList}"/>
+                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="175"  SelectedValue="{Binding PositionModel.SelectedItem.OrderId}" DisplayMemberPath="Id" SelectedValuePath="Id" ItemsSource="{Binding PositionModel.OrderList}"/>
             </WrapPanel>
             <WrapPanel Margin="0 10 0 0">
                 <Button Width="150" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding AddNewItemCommand}" CommandParameter="{Binding PositionModel.SelectedItem}" Content="Add New Row"/>

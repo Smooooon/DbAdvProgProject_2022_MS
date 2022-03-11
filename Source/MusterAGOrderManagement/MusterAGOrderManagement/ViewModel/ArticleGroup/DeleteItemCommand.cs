@@ -30,7 +30,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
                 ArticleGroupItemModel articleGroupItemModel = (ArticleGroupItemModel)parameter;
                 _articleGroupDomain.DeleteArticleGroup(articleGroupItemModel.Id);
 
-                _articleGroupViewModel.RefreshArticleList();
+                _articleGroupViewModel.RefreshData();
             }
             else
             {

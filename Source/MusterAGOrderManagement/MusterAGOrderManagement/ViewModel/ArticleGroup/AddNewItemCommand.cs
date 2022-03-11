@@ -48,7 +48,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
             ArticleGroupDto newItemDto = _articleGroupDomain.CreateArticleGroup(articleGroupItemModel.ToDto());
             ArticleGroupItemModel newItem = newItemDto.ToModel();
 
-            _articleGroupViewModel.RefreshArticleList();
+            _articleGroupViewModel.RefreshData();
 
             ArticleGroupItemModel newSelectedItem = new ArticleGroupItemModel();
             newSelectedItem.Id = newItem.Id;

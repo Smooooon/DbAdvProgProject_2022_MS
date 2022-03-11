@@ -40,7 +40,7 @@ namespace MusterAGOrderManagement.ViewModel.Order
 
                 _orderDomain.UpdateOrders(orderDtoList);
 
-                _orderViewModel.RefreshOrderList();
+                _orderViewModel.RefreshData();
             }
             else
             {

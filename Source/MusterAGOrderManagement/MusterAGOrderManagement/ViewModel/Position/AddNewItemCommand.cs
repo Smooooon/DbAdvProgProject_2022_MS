@@ -49,7 +49,7 @@ namespace MusterAGOrderManagement.ViewModel.Position
             PositionDto newItemDto = _positionDomain.CreatePosition(positionItemModel.ToDto());
             PositionItemModel newItem = newItemDto.ToModel();
 
-            _positionViewModel.RefreshPositionList();
+            _positionViewModel.RefreshData();
 
             PositionItemModel newSelectedItem = new PositionItemModel();
             newSelectedItem.Id = newItem.Id;

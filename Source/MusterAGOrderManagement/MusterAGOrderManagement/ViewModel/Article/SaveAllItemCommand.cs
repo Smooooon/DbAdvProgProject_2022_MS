@@ -43,7 +43,7 @@ namespace MusterAGOrderManagement.Article.ViewModel
 
                 _articleDomain.UpdateArticles(articleDtoList);
 
-                _articleViewModel.RefreshArticleList();
+                _articleViewModel.RefreshData();
             }
             else
             {

@@ -16,8 +16,6 @@ namespace MusterAGOrderManagement.ViewModel.Customer
         private CustomerDomain _customerDomain;
         private AddressDomain _addressDomain;
 
-        public IList<AddressItemModel> AddressList { get; set; }
-
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
         {
@@ -56,13 +54,8 @@ namespace MusterAGOrderManagement.ViewModel.Customer
             CustomerModel = new CustomerModel();
             _customerDomain = new CustomerDomain();
             _addressDomain = new AddressDomain();
-            AddressList = new List<AddressItemModel>();
-            IList<AddressDto> addresses = _addressDomain.GetAddresses();
 
-            foreach (AddressDto addressDto in addresses)
-                AddressList.Add(addressDto.ToModel());
-
-            RefreshCustomerList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(CustomerModel.Customers);
             ItemsView.Filter = x => Filter(x as CustomerItemModel);
@@ -79,8 +72,9 @@ namespace MusterAGOrderManagement.ViewModel.Customer
                   (itemModel.Address.Street ?? string.Empty).ToLower().Contains(searchstring));
         }
 
-        public void RefreshCustomerList()
+        public void RefreshData()
         {
+            //Customer
             IList<CustomerDto> customerDtoList = _customerDomain.GetCustomers();
 
             if (CustomerModel.Customers != null)
@@ -90,6 +84,13 @@ namespace MusterAGOrderManagement.ViewModel.Customer
 
             foreach (CustomerDto customerDto in customerDtoList)
                 CustomerModel.Customers.Add(customerDto.ToModel());
+
+            //Address
+            CustomerModel.AddressList = new ObservableCollection<AddressItemModel>();
+            IList<AddressDto> addresses = _addressDomain.GetAddresses();
+
+            foreach (AddressDto addressDto in addresses)
+                CustomerModel.AddressList.Add(addressDto.ToModel());
         }
     }
 }

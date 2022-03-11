@@ -2,12 +2,9 @@
 
 namespace MusterAGOrderManagement.Model.Address
 {
-    internal class TownItemModel
+    internal class CountryItemModel
     {
         public int Id { get; set; }
-        public int PLZ { get; set; }
         public string Name { get; set; }
-        public int CountryId { get; set; }
-        public virtual CountryItemModel Country { get; set; }
     }
 }

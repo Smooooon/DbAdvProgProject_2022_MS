@@ -48,7 +48,7 @@ namespace MusterAGOrderManagement.ViewModel.Address
             AddressDto newItemDto = _addressDomain.CreateAddress(addressItemModel.ToDto());
             AddressItemModel newItem = newItemDto.ToModel();
 
-            _addressViewModel.RefreshAddressList();
+            _addressViewModel.RefreshData();
 
             AddressItemModel newSelectedItem = new AddressItemModel();
             newSelectedItem.Id = newItem.Id;

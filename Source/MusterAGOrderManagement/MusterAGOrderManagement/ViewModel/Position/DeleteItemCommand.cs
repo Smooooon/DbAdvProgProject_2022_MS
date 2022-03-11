@@ -30,7 +30,7 @@ namespace MusterAGOrderManagement.ViewModel.Position
                 PositionItemModel positionItemModel = (PositionItemModel)parameter;
                 _positionDomain.DeletePosition(positionItemModel.Id);
 
-                _positionViewModel.RefreshPositionList();
+                _positionViewModel.RefreshData();
             }
             else
             {

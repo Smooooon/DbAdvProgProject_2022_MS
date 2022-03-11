@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using MusterAGOrderManagement.Model.Address;
+using System.Collections.ObjectModel;
 
 namespace MusterAGOrderManagement.Model.Customer
 {
@@ -21,6 +22,17 @@ namespace MusterAGOrderManagement.Model.Customer
             set
             {
                 _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<AddressItemModel>? _addressList { get; set; }
+        public ObservableCollection<AddressItemModel> AddressList
+        {
+            get { return _addressList; }
+            set
+            {
+                _addressList = value;
                 OnPropertyChanged();
             }
         }

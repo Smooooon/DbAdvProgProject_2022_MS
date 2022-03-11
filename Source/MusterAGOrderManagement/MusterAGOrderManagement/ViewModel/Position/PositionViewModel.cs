@@ -18,9 +18,6 @@ namespace MusterAGOrderManagement.ViewModel.Position
         private ArticleDomain _articleDomain;
         private OrderDomain _orderDomain;
 
-        public IList<ArticleItemModel> ArticleList { get; set; }
-        public IList<OrderItemModel> OrderList { get; set; }
-
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
         {
@@ -58,24 +55,10 @@ namespace MusterAGOrderManagement.ViewModel.Position
         {
             PositionModel = new PositionModel();
             _positionDomain = new PositionDomain();
-
-            //Artikel
             _articleDomain = new ArticleDomain();
-            ArticleList = new List<ArticleItemModel>();
-            IList<ArticleDto> article = _articleDomain.GetArticles();
-
-            foreach (ArticleDto articleDto in article)
-                ArticleList.Add(articleDto.ToModel());
-
-            //Order
             _orderDomain = new OrderDomain();
-            OrderList = new List<OrderItemModel>();
-            IList<OrderDto> orders = _orderDomain.GetOrders();
 
-            foreach (OrderDto orderDto in orders)
-                OrderList.Add(orderDto.ToModel());
-
-            RefreshPositionList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(PositionModel.Positions);
             ItemsView.Filter = x => Filter(x as PositionItemModel);
@@ -91,8 +74,9 @@ namespace MusterAGOrderManagement.ViewModel.Position
                   (itemModel.Order.Id.ToString().ToLower().Contains(searchstring)));
         }
 
-        public void RefreshPositionList()
+        public void RefreshData()
         {
+            //Position
             IList<PositionDto> positionDtoList = _positionDomain.GetPositions();
 
             if (PositionModel.Positions != null)
@@ -102,6 +86,20 @@ namespace MusterAGOrderManagement.ViewModel.Position
 
             foreach (PositionDto positionDto in positionDtoList)
                 PositionModel.Positions.Add(positionDto.ToModel());
+
+            //Artikel
+            PositionModel.ArticleList = new ObservableCollection<ArticleItemModel>();
+            IList<ArticleDto> article = _articleDomain.GetArticles();
+
+            foreach (ArticleDto articleDto in article)
+                PositionModel.ArticleList.Add(articleDto.ToModel());
+
+            //Order
+            PositionModel.OrderList = new ObservableCollection<OrderItemModel>();
+            IList<OrderDto> orders = _orderDomain.GetOrders();
+
+            foreach (OrderDto orderDto in orders)
+                PositionModel.OrderList.Add(orderDto.ToModel());
         }
     }
 }

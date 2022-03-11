@@ -13,6 +13,7 @@ namespace DataAccessLayer.Services
 
         public ArticleGroupDao Create(ArticleGroupDao articleGroupDao)
         {
+            articleGroupDao.HigherLevelArticleGroup = null;
             using (DataContext context = new DataContext())
             {
                 var createdResult = context.Add(articleGroupDao);
@@ -28,7 +29,7 @@ namespace DataAccessLayer.Services
         {
             using (DataContext context = new DataContext())
             {
-                var articleToDelete = context.Articles.FirstOrDefault(a => a.Id == id);
+                var articleToDelete = context.ArticleGroups.FirstOrDefault(a => a.Id == id);
 
                 if (articleToDelete == null)
                     return false;

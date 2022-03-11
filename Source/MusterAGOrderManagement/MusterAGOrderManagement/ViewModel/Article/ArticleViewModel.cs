@@ -18,8 +18,6 @@ namespace MusterAGOrderManagement.Article.ViewModel
         private ArticleDomain _articleDomain;
         private ArticleGroupDomain _articleGroupDomain;
 
-        public IList<ArticleGroupItemModel> ArticleGroupList { get; set; }
-
         private SaveAllItemCommand _saveAllItemCommand = null;
         public ICommand SaveAllItemCommand
         {
@@ -58,13 +56,8 @@ namespace MusterAGOrderManagement.Article.ViewModel
             ArticleModel = new ArticleModel();
             _articleDomain = new ArticleDomain();
             _articleGroupDomain = new ArticleGroupDomain();
-            ArticleGroupList = new List<ArticleGroupItemModel>();
-            IList <ArticleGroupDto> articleGroups = _articleGroupDomain.GetArticleGroups();
 
-            foreach (ArticleGroupDto articleGroupDto in articleGroups)
-                ArticleGroupList.Add(articleGroupDto.ToModel());
-
-            RefreshArticleList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(ArticleModel.Articles);
             ItemsView.Filter = x => Filter(x as ArticleItemModel);
@@ -80,8 +73,16 @@ namespace MusterAGOrderManagement.Article.ViewModel
                   (articleItemModel.ArticleGroup.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
-        public void RefreshArticleList()
+        public void RefreshData()
         {
+            //ArticleGroup
+            ArticleModel.ArticleGroupList = new ObservableCollection<ArticleGroupItemModel>();
+            IList<ArticleGroupDto> articleGroups = _articleGroupDomain.GetArticleGroups();
+
+            foreach (ArticleGroupDto articleGroupDto in articleGroups)
+                ArticleModel.ArticleGroupList.Add(articleGroupDto.ToModel());
+
+            //Article
             IList<ArticleDto> articleDtoList = _articleDomain.GetArticles();
 
             if (ArticleModel.Articles != null)

@@ -13,6 +13,8 @@ namespace DataAccessLayer.Services
 
         public ArticleDao Create(ArticleDao articleDao)
         {
+            articleDao.ArticleGroup = null;
+
             using (DataContext context = new DataContext())
             {
                 var createdResult = context.Add(articleDao);

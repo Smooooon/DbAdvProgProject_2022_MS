@@ -40,7 +40,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
 
                 _customerDomain.UpdateCustomers(customerDtoList);
 
-                _customerViewModel.RefreshCustomerList();
+                _customerViewModel.RefreshData();
             }
             else
             {

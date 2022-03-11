@@ -52,7 +52,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
             ArticleGroupModel = new ArticleGroupModel();
             _articleGroupDomain = new ArticleGroupDomain();
 
-            RefreshArticleList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(ArticleGroupModel.ArticleGroups);
             ItemsView.Filter = x => Filter(x as ArticleGroupItemModel);
@@ -67,7 +67,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
                   (itemModel.HigherLevelArticleGroup?.Name ?? string.Empty).ToLower().Contains(searchstring));
         }
 
-        public void RefreshArticleList()
+        public void RefreshData()
         {
             IList<ArticleGroupDto> articleGroupDtoList = _articleGroupDomain.GetArticleGroups();
 

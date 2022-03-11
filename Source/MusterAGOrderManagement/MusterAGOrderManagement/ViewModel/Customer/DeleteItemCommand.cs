@@ -30,7 +30,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
                 CustomerItemModel customerItemModel = (CustomerItemModel)parameter;
                 _customerDomain.DeleteCustomer(customerItemModel.Id);
 
-                _customerViewModel.RefreshCustomerList();
+                _customerViewModel.RefreshData();
             }
             else
             {

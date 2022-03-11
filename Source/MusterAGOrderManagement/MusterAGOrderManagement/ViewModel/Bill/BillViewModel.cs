@@ -17,23 +17,14 @@ namespace MusterAGOrderManagement.ViewModel.Bill
         public BillModel BillModel { get; set; }
         private OrderDomain _orderDomain;
         private CustomerDomain _customerDomain;
-        //private AddressDomain _addressDomain;
-
-        //public IList<AddressItemModel> AddressList { get; set; }
 
         public BillViewModel()
         {
             BillModel = new BillModel();
             _customerDomain = new CustomerDomain();
             _orderDomain = new OrderDomain();
-            //_addressDomain = new AddressDomain();
-            //AddressList = new List<AddressItemModel>();
-            //IList<AddressDto> addresses = _addressDomain.GetAddresses();
 
-            //foreach (AddressDto addressDto in addresses)
-            //    AddressList.Add(addressDto.ToModel());
-
-            RefreshList();
+            RefreshData();
 
             ItemsView = CollectionViewSource.GetDefaultView(BillModel.Bills);
             ItemsView.Filter = x => Filter(x as BillItemModel);
@@ -50,12 +41,13 @@ namespace MusterAGOrderManagement.ViewModel.Bill
                  itemModel.PLZ.ToString().ToLower().Contains(searchstring) ||
                  (itemModel.TownName ?? string.Empty).ToLower().Contains(searchstring) ||
                  (itemModel.CountryName ?? string.Empty).ToLower().Contains(searchstring) ||
+                 itemModel.OrderId.ToString().ToLower().Contains(searchstring) ||
                  itemModel.Ordered.ToString().ToLower().Contains(searchstring) ||
                  itemModel.AmountNeto.ToString().ToLower().Contains(searchstring) ||
                  itemModel.AmountBrutto.ToString().ToLower().Contains(searchstring));
         }
 
-        public void RefreshList()
+        public void RefreshData()
         {
             decimal mwst = 7.77M;
             BillModel.Bills = new ObservableCollection<BillItemModel>();

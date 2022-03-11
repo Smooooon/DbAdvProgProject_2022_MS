@@ -15,6 +15,7 @@ namespace MusterAGOrderManagement.Mapping
             townModel.PLZ = townDto.PLZ;
             townModel.Name = townDto.Name;
             townModel.CountryId = townDto.CountryId;
+            townModel.Country = townDto.Country.ToModel();
 
             return townModel;
         }
@@ -29,6 +30,7 @@ namespace MusterAGOrderManagement.Mapping
             townDto.PLZ = townModel.PLZ;
             townDto.Name = townModel.Name;
             townDto.CountryId = townModel.CountryId;
+            townDto.Country = townModel.Country.ToDto();
 
             return townDto;
         }

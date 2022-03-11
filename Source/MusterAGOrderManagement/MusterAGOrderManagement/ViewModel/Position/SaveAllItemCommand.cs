@@ -40,7 +40,7 @@ namespace MusterAGOrderManagement.ViewModel.Position
 
                 _positionDomain.UpdatePositions(positionDtoList);
 
-                _positionViewModel.RefreshPositionList();
+                _positionViewModel.RefreshData();
             }
             else
             {

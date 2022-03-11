@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using MusterAGOrderManagement.Model.Article;
+using MusterAGOrderManagement.Model.Order;
+using System.Collections.ObjectModel;
 
 namespace MusterAGOrderManagement.Model.Position
 {
@@ -21,6 +23,28 @@ namespace MusterAGOrderManagement.Model.Position
             set
             {
                 _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<ArticleItemModel>? _articleList { get; set; }
+        public ObservableCollection<ArticleItemModel> ArticleList
+        {
+            get { return _articleList; }
+            set
+            {
+                _articleList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<OrderItemModel>? _orderList { get; set; }
+        public ObservableCollection<OrderItemModel> OrderList
+        {
+            get { return _orderList; }
+            set
+            {
+                _orderList = value;
                 OnPropertyChanged();
             }
         }

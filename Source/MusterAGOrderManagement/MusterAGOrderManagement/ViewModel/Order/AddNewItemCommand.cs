@@ -48,7 +48,7 @@ namespace MusterAGOrderManagement.ViewModel.Order
             OrderDto newItemDto = _orderDomain.CreateOrder(orderItemModel.ToDto());
             OrderItemModel newItem = newItemDto.ToModel();
 
-            _orderViewModel.RefreshOrderList();
+            _orderViewModel.RefreshData();
 
             OrderItemModel newSelectedItem = new OrderItemModel();
             newSelectedItem.Id = newItem.Id;

@@ -12,6 +12,9 @@ namespace DataAccessLayer.Services
 
         public PositionDao Create(PositionDao positionDao)
         {
+            positionDao.Article = null;
+            positionDao.Order = null;
+
             using (DataContext context = new DataContext())
             {
                 var createdResult = context.Add(positionDao);

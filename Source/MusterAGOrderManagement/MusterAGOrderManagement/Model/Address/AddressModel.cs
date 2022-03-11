@@ -24,5 +24,16 @@ namespace MusterAGOrderManagement.Model.Address
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<TownItemModel>? _townList { get; set; }
+        public ObservableCollection<TownItemModel> TownList
+        {
+            get { return _townList; }
+            set
+            {
+                _townList = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

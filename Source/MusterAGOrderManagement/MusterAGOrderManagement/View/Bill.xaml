@@ -18,7 +18,7 @@
 
 
         <DataGrid x:Name="DataGridCustomer"
-                  ItemsSource="{Binding BillModel.Bills}"
+                  ItemsSource="{Binding ItemsView}"
                   AlternatingRowBackground="LightGray"
                   CanUserDeleteRows="False"
                   CanUserAddRows="False"

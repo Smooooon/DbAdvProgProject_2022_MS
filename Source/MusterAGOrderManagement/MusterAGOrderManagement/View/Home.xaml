@@ -7,17 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     <Grid>
-        <TabControl>
+        <TabControl Name="TabControl" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Home">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock Margin="20 0 0 0" Text="Willkomemn" FontSize="50"></TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="ArticleGroup">
-                <localviews:ArticleGroup />
+                <localviews:ArticleGroup/>
             </TabItem>
             <TabItem Header="Article">
-                <localviews:Article />
+                <localviews:Article/>
             </TabItem>
             <TabItem Header="Order">
                 <localviews:Order/>

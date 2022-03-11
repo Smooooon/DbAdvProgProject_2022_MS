@@ -36,7 +36,7 @@ namespace MusterAGOrderManagement.Article.ViewModel
                 ArticleItemModel articleItemModel = (ArticleItemModel)parameter;
                 _articleDomain.DeleteArticle(articleItemModel.Id);
 
-                _articleViewModel.RefreshArticleList();
+                _articleViewModel.RefreshData();
             }
             else
             {

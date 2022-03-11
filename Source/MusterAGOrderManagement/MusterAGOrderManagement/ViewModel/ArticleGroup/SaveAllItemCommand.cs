@@ -40,7 +40,7 @@ namespace MusterAGOrderManagement.ViewModel.ArticleGroup
 
                 _articleGroupDomain.UpdateArticleGroups(articleGroupDtoList);
 
-                _articleGroupViewModel.RefreshArticleList();
+                _articleGroupViewModel.RefreshData();
             }
             else
             {

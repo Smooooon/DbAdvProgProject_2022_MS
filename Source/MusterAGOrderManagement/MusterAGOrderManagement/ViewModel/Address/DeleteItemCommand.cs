@@ -30,7 +30,7 @@ namespace MusterAGOrderManagement.ViewModel.Address
                 AddressItemModel addressItemModel = (AddressItemModel)parameter;
                 _addressDomain.DeleteAddress(addressItemModel.Id);
 
-                _addressViewModel.RefreshAddressList();
+                _addressViewModel.RefreshData();
             }
             else
             {
