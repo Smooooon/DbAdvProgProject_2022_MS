@@ -79,5 +79,17 @@ namespace DataAccessLayer.Services
                 return articleGroupDao;
             }
         }
+
+        //public void ArticelGroupeTree(ArticleGroupDao articleGroupDao)
+        //{
+        //    using (DataContext context = new DataContext())
+        //    {
+        //        context.Update(articleGroupDao);
+        //        context.SaveChanges();
+
+        //        return articleGroupDao;
+        //    }
+        //}
+
     }
 }
