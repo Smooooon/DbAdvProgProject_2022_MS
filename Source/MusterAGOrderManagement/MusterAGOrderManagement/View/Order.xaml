@@ -27,7 +27,8 @@
                   AutoGenerateColumns="False"
                   Grid.Column="0" Grid.Row="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bestelldatum" Binding="{Binding Ordered}" Width="0.3*"/>
+                <DataGridTextColumn Header="Nr" Binding="{Binding Id}" Width="0.1*"/>
+                <DataGridTextColumn Header="Bestelldatum" Binding="{Binding Ordered}" Width="0.2*"/>
                 <DataGridTextColumn Header="Customer" Binding="{Binding Customer.Name}" Width="0.2*"/>
             </DataGrid.Columns>
         </DataGrid>

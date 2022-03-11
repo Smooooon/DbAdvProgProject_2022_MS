@@ -40,11 +40,14 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public CustomerDao Get(int id)
+        public CustomerDao Get(int id, DateTime temporalQueryTime)
         {
+            //Temporale Daten werden in UTC gespeichert
+            temporalQueryTime = temporalQueryTime.ToUniversalTime();
+
             using (DataContext context = new DataContext())
             {
-                CustomerDao? customerDao = context.Customers.FirstOrDefault(a => a.Id == id);
+                CustomerDao? customerDao = context.Customers.TemporalAsOf(temporalQueryTime.ToUniversalTime()).FirstOrDefault(a => a.Id == id);
 
                 if (customerDao == null)
                     throw new ArgumentException($"Customer mit der Id '{id}' nicht gefunden");

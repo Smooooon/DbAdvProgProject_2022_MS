@@ -29,6 +29,7 @@ namespace MusterAG.BusinessLogic.Mapping
             orderDto.Ordered = orderDao.Ordered;
             orderDto.CustomerId = orderDao.CustomerId;
             orderDto.Customer = orderDao.Customer.ToDto();
+            orderDto.Positions = orderDao.Positions.ToDto();
 
             return orderDto;
         }

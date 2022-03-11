@@ -36,5 +36,35 @@ namespace MusterAG.BusinessLogic.Mapping
 
             return positionDto;
         }
+
+        public static PositionDto ToDtoWithoutOrder(this PositionDao positionDao)
+        {
+            if (positionDao == null)
+                return null;
+
+            PositionDto positionDto = new PositionDto();
+            positionDto.Id = positionDao.Id;
+            positionDto.Quantity = positionDao.Quantity;
+            positionDto.ArticleId = positionDao.ArticleId;
+            positionDto.OrderId = positionDao.OrderId;
+            positionDto.Article = positionDao.Article.ToDto();
+
+            return positionDto;
+        }
+
+        public static ICollection<PositionDto> ToDto(this ICollection<PositionDao> positionDaoList)
+        {
+            if (positionDaoList == null)
+                return null;
+
+            ICollection<PositionDto> positionDtoList = new List<PositionDto>();
+
+            foreach (PositionDao positionDao in positionDaoList)
+            {
+                positionDtoList.Add(positionDao.ToDtoWithoutOrder());
+            }
+
+            return positionDtoList;
+        }
     }
 }

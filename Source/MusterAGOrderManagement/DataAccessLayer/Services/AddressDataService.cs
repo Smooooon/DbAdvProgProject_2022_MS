@@ -44,7 +44,7 @@ namespace DataAccessLayer.Services
         {
             using (DataContext context = new DataContext())
             {
-                AddressDao? addressDao = context.Addresses.FirstOrDefault(a => a.Id == id);
+                AddressDao? addressDao = context.Addresses.Include(a => a.Town).Include(a => a.Town.Country).FirstOrDefault(a => a.Id == id);
 
                 if (addressDao == null)
                     throw new ArgumentException($"Address mit der Id '{id}' nicht gefunden");

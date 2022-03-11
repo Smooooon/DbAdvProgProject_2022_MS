@@ -58,7 +58,7 @@ namespace DataAccessLayer.Services
 
             using (DataContext context = new DataContext())
             {
-                positionDtoList = context.Positions.Include("Article").Include("Order").ToList();
+                positionDtoList = context.Positions.Include(p => p.Article).Include(p => p.Order).ToList();
 
                 return positionDtoList;
             }

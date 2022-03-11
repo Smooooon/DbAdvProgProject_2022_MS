@@ -31,6 +31,9 @@
             <TabItem Header="Address">
                 <localviews:Address/>
             </TabItem>
+            <TabItem Header="Rechnung">
+                <localviews:Bill/>
+            </TabItem>
         </TabControl>
 
     </Grid>

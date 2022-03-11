@@ -19,6 +19,9 @@ namespace DataAccessLayer
             //Weiterer Code
             modelBuilder.Entity<TownDao>().HasKey(t => t.Id);
 
+            //Temporale Tabelle
+            modelBuilder.Entity<CustomerDao>().ToTable(t => t.IsTemporal());
+
             //Beziehungen
             modelBuilder.Entity<CustomerDao>().HasOne<AddressDao>(c => c.Address).WithMany(a => a.Customers).HasForeignKey(c => c.AddressId);
             modelBuilder.Entity<AddressDao>().HasOne<TownDao>(a => a.Town).WithMany(t => t.Addresses).HasForeignKey(a => a.TownId);

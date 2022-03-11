@@ -16,7 +16,13 @@ namespace MusterAG.BusinessLogic.Domain
             IList<OrderDao> orderDaoList = _orderDataService.GetAll();
 
             foreach (OrderDao orderDao in orderDaoList)
+            {
+                //GetArticleToPosition(){
+
+                //}
+
                 orderDtoList.Add(orderDao.ToDto());
+            }
 
             return orderDtoList;
         }

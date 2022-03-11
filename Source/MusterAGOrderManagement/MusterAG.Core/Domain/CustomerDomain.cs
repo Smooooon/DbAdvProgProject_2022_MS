@@ -7,7 +7,8 @@ namespace MusterAG.BusinessLogic.Domain
 {
     public class CustomerDomain
     {
-        public CustomerDataService _customerDataService = new CustomerDataService();
+        private CustomerDataService _customerDataService = new CustomerDataService();
+        private AddressDomain _addressDomain = new AddressDomain();
 
         public IList<CustomerDto> GetCustomers()
         {
@@ -19,6 +20,16 @@ namespace MusterAG.BusinessLogic.Domain
                 customerDtoList.Add(customerDao.ToDto());
 
             return customerDtoList;
+        }
+
+        public CustomerDto GetCustomerTemporal(int id, DateTime temporalQueryTime)
+        {
+            CustomerDao customerDao = _customerDataService.Get(id, temporalQueryTime);
+
+            //Addresse ist nicht Temporal, desswegen muss sie separat geladen werden
+            customerDao.Address = _addressDomain.GetAddress(customerDao.AddressId).ToDao();
+
+            return customerDao.ToDto();
         }
 
         public bool UpdateCustomers(IList<CustomerDto> customerDtoList)

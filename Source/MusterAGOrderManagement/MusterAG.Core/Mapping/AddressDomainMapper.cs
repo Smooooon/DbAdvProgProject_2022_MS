@@ -32,5 +32,59 @@ namespace MusterAG.BusinessLogic.Mapping
 
             return addressDto;
         }
+
+        public static TownDao ToDao(this TownDto townDto)
+        {
+            if (townDto == null)
+                return null;
+
+            TownDao townDao = new TownDao();
+            townDao.Id = townDto.Id;
+            townDao.PLZ = townDto.PLZ;
+            townDao.Name = townDto.Name;
+            townDao.CountryId = townDto.CountryId;
+            townDao.Country = townDto.Country.ToDao();
+
+            return townDao;
+        }
+
+        public static TownDto ToDto(this TownDao townDao)
+        {
+            if (townDao == null)
+                return null;
+
+            TownDto townDto = new TownDto();
+            townDto.Id = townDao.Id;
+            townDto.PLZ = townDao.PLZ;
+            townDto.Name = townDao.Name;
+            townDto.CountryId = townDao.CountryId;
+            townDto.Country = townDao.Country.ToDto();
+
+            return townDto;
+        }
+
+        public static CountryDao ToDao(this CountryDto countryDto)
+        {
+            if (countryDto == null)
+                return null;
+
+            CountryDao countryDao = new CountryDao();
+            countryDao.Id = countryDto.Id;
+            countryDao.Name = countryDto.Name;
+
+            return countryDao;
+        }
+
+        public static CountryDto ToDto(this CountryDao countryDao)
+        {
+            if (countryDao == null)
+                return null;
+
+            CountryDto countryDto = new CountryDto();
+            countryDto.Id = countryDao.Id;
+            countryDto.Name = countryDao.Name;
+
+            return countryDto;
+        }
     }
 }

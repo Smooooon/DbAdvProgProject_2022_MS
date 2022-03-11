@@ -22,6 +22,13 @@ namespace MusterAG.BusinessLogic.Domain
             return addressDtoList;
         }
 
+        public AddressDto GetAddress(int id)
+        {
+            AddressDao addressDao = _addressDataService.Get(id);
+
+            return addressDao.ToDto();
+        }
+
         public bool UpdateAddresses(IList<AddressDto> addressDtoList)
         {
             bool success = true;
