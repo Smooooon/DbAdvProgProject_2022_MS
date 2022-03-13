@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="MusterAGOrderManagement.View.ArticleGroupTree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MusterAGOrderManagement.View"
+             mc:Ignorable="d" FontSize="40"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <WrapPanel Margin="0 10 0 0">
+            <TextBlock>Nur teilweise im Script File umgesetzt</TextBlock>
+        </WrapPanel>
+    </Grid>
+</UserControl>

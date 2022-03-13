@@ -68,5 +68,10 @@ namespace MusterAGOrderManagement
                 }
             }
         }
+
+        private void Statistic_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

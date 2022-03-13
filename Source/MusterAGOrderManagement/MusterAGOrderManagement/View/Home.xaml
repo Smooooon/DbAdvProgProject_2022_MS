@@ -34,6 +34,12 @@
             <TabItem Header="Rechnung">
                 <localviews:Bill/>
             </TabItem>
+            <TabItem Header="Statistik">
+                <localviews:Statistic/>
+            </TabItem>
+            <TabItem Header="ArticleGroup Baum">
+                <localviews:ArticleGroupTree/>
+            </TabItem>
         </TabControl>
 
     </Grid>
