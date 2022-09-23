@@ -12,6 +12,7 @@ namespace MusterAG.BusinessLogic.Mapping
 
             CustomerDao customerDao = new CustomerDao();
             customerDao.Id = customerDto.Id;
+            customerDao.CustomerNr = customerDto.CustomerNr;
             customerDao.Name = customerDto.Name;
             customerDao.Email = customerDto.Email;
             customerDao.Website = customerDto.Website;
@@ -29,6 +30,7 @@ namespace MusterAG.BusinessLogic.Mapping
 
             CustomerDto customerDto = new CustomerDto();
             customerDto.Id = customerDao.Id;
+            customerDto.CustomerNr = customerDao.CustomerNr;
             customerDto.Name = customerDao.Name;
             customerDto.Email = customerDao.Email;
             customerDto.Website = customerDao.Website;

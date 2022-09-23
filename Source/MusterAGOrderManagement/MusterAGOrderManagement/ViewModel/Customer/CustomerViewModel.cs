@@ -3,6 +3,7 @@ using MusterAG.BusinessLogic.Dto;
 using MusterAGOrderManagement.Mapping;
 using MusterAGOrderManagement.Model.Address;
 using MusterAGOrderManagement.Model.Customer;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
@@ -46,6 +47,43 @@ namespace MusterAGOrderManagement.ViewModel.Customer
                 if (_deleteItemCommand == null)
                     _deleteItemCommand = new DeleteItemCommand(this, _customerDomain);
                 return _deleteItemCommand;
+            }
+        }
+
+        private ImportCommand _importCommand = null;
+        public ICommand ImportCommand
+        {
+            get
+            {
+                if (_importCommand == null)
+                    _importCommand = new ImportCommand(this, _customerDomain);
+                return _importCommand;
+            }
+        }
+
+        private ExportCommand _exportCommand = null;
+        public ICommand ExportCommand
+        {
+            get
+            {
+                if (_exportCommand == null)
+                    _exportCommand = new ExportCommand(this, _customerDomain);
+                return _exportCommand;
+            }
+        }
+
+        private DateTime? _datetimeForTemporal = null;
+        public DateTime? DateTimeForTemporal
+        {
+            get
+            {
+
+                return _datetimeForTemporal;
+            }
+            set
+            {
+                _datetimeForTemporal = value;
+                OnPropertyChanged();
             }
         }
 

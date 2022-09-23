@@ -12,6 +12,7 @@ namespace MusterAGOrderManagement.Mapping
 
             CustomerItemModel customerModel = new CustomerItemModel();
             customerModel.Id = customerDto.Id;
+            customerModel.CustomerNr = customerDto.CustomerNr;
             customerModel.Name = customerDto.Name;
             customerModel.Email = customerDto.Email;
             customerModel.Website = customerDto.Website;
@@ -29,6 +30,7 @@ namespace MusterAGOrderManagement.Mapping
 
             CustomerDto customerDto = new CustomerDto();
             customerDto.Id = customerModel.Id;
+            customerDto.CustomerNr = customerModel.CustomerNr;
             customerDto.Name = customerModel.Name;
             customerDto.Email = customerModel.Email;
             customerDto.Website = customerModel.Website;

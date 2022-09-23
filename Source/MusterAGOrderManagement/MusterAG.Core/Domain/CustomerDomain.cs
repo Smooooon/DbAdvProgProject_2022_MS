@@ -32,6 +32,22 @@ namespace MusterAG.BusinessLogic.Domain
             return customerDao.ToDto();
         }
 
+        public IList<CustomerDto> GetCustomersTemporal(DateTime temporalQueryTime)
+        {
+            IList<CustomerDto> customerDtoList = new List<CustomerDto>();
+
+            IList<CustomerDao> customerDaoList = _customerDataService.GetAllTemporal(temporalQueryTime);
+
+            foreach (CustomerDao customerDao in customerDaoList)
+            {
+                //Addresse ist nicht Temporal, desswegen muss sie separat geladen werden
+                customerDao.Address = _addressDomain.GetAddress(customerDao.AddressId).ToDao();
+                customerDtoList.Add(customerDao.ToDto());
+            }
+
+            return customerDtoList;
+        }
+
         public bool UpdateCustomers(IList<CustomerDto> customerDtoList)
         {
             bool success = true;

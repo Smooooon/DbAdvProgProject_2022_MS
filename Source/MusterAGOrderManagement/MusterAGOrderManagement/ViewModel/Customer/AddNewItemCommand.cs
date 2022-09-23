@@ -43,6 +43,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
         private void CreateNewEmptyItem(CustomerItemModel customerItemModel)
         {
             customerItemModel.Id = 0;
+            customerItemModel.CustomerNr = "CU" + new Random().Next(10000, 99999);
             customerItemModel.Name = string.Empty;
             customerItemModel.Email = string.Empty;
             customerItemModel.Website = string.Empty;
@@ -55,6 +56,7 @@ namespace MusterAGOrderManagement.ViewModel.Customer
 
             CustomerItemModel newSelectedItem = new CustomerItemModel();
             newSelectedItem.Id = newItem.Id;
+            newSelectedItem.CustomerNr = newItem.CustomerNr;
             newSelectedItem.Name = newItem.Name;
             newSelectedItem.Email = newItem.Email;
             newSelectedItem.Website = newItem.Website;

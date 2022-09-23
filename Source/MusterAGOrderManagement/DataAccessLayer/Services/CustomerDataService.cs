@@ -68,6 +68,21 @@ namespace DataAccessLayer.Services
             }
         }
 
+        public IList<CustomerDao> GetAllTemporal(DateTime temporalQueryTime)
+        {
+            IList<CustomerDao> customerDtoList;
+
+            //Temporale Daten werden in UTC gespeichert
+            temporalQueryTime = temporalQueryTime.ToUniversalTime();
+
+            using (DataContext context = new DataContext())
+            {
+                customerDtoList = context.Customers.TemporalAsOf(temporalQueryTime.ToUniversalTime()).ToList();
+
+                return customerDtoList;
+            }
+        }
+
         public CustomerDao Update(CustomerDao customerDao)
         {
             //Objekt ignorieren
