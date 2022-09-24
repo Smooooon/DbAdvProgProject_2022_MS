@@ -5,6 +5,7 @@ using MusterAGOrderManagement.Model.Customer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MusterAGOrderManagement.ViewModel.Customer
@@ -30,21 +31,37 @@ namespace MusterAGOrderManagement.ViewModel.Customer
 
         public void Execute(object? parameter)
         {
-            if (parameter is ObservableCollection<CustomerItemModel>)
+            try
             {
-                IList<CustomerDto> customerDtoList = new List<CustomerDto>();
-                IList<CustomerItemModel> customerItems = (IList<CustomerItemModel>)parameter;
+                if (parameter is ObservableCollection<CustomerItemModel>)
+                {
+                    IList<CustomerDto> customerDtoList = new List<CustomerDto>();
+                    IList<CustomerItemModel> customerItems = (IList<CustomerItemModel>)parameter;
 
-                foreach (CustomerItemModel customerItemModel in customerItems)
-                    customerDtoList.Add(customerItemModel.ToDto());
+                    foreach (CustomerItemModel customerItemModel in customerItems)
+                    {
+                        CustomerDto customerDto = customerItemModel.ToDto();
+                        _customerDomain.ValidateCustomer(customerDto);
 
-                _customerDomain.UpdateCustomers(customerDtoList);
+                        customerDtoList.Add(customerDto);
+                    }
 
-                _customerViewModel.RefreshData();
+                    _customerDomain.UpdateCustomers(customerDtoList);
+
+                    _customerViewModel.RefreshData();
+                }
+                else
+                {
+                    throw new ArgumentException($"Button Fehlfunktion, keine korrekten Daten verfügbar {parameter}");
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                throw new ArgumentException($"Button Fehlfunktion, keine korrekten Daten verfügbar {parameter}");
+                MessageBox.Show($"Eingabe entspricht nicht der Vorgabe! {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Speichern! {ex}");
             }
         }
     }

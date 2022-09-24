@@ -4,6 +4,7 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MusterAG.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220924001126_Fehlerkorrektr")]
+    partial class Fehlerkorrektr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,7 +320,7 @@ namespace MusterAG.DataAccessLayer.Migrations
                             CustomerNr = "CU11111",
                             Email = "max.muster@muster.com",
                             Name = "Max Muster",
-                            Password = "Sav3Password",
+                            Password = "dasPasswort",
                             Website = "muster.com"
                         },
                         new
@@ -328,7 +330,7 @@ namespace MusterAG.DataAccessLayer.Migrations
                             CustomerNr = "CU22222",
                             Email = "manuela.sturzi@sturzi.com",
                             Name = "Manuela Sturzi",
-                            Password = "Sav3Password",
+                            Password = "dasPasswort2",
                             Website = "sturzi.com"
                         });
                 });

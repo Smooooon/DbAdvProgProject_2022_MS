@@ -43,8 +43,8 @@ namespace DataAccessLayer
             modelBuilder.Entity<AddressDao>().HasData(new AddressDao() { Id = 4, Street = "Lolastrasse 2", TownId = 2 });
 
             //Cusomer
-            modelBuilder.Entity<CustomerDao>().HasData(new CustomerDao() { Id = 1, Name = "Max Muster", CustomerNr="Cu11111", Email = "max.muster@muster.com", Website = "muster.com", Password = "dasPasswort", AddressId = 1 });
-            modelBuilder.Entity<CustomerDao>().HasData(new CustomerDao() { Id = 2, Name = "Manuela Sturzi", CustomerNr = "Cu22222", Email = "manuela.sturzi@sturzi.com", Website = "sturzi.com", Password = "dasPasswort2", AddressId = 2 });
+            modelBuilder.Entity<CustomerDao>().HasData(new CustomerDao() { Id = 1, Name = "Max Muster", CustomerNr="CU11111", Email = "max.muster@muster.com", Website = "muster.com", Password = "Sav3Password", AddressId = 1 });
+            modelBuilder.Entity<CustomerDao>().HasData(new CustomerDao() { Id = 2, Name = "Manuela Sturzi", CustomerNr = "CU22222", Email = "manuela.sturzi@sturzi.com", Website = "sturzi.com", Password = "Sav3Password", AddressId = 2 });
 
             //Artikel Gruppen
             modelBuilder.Entity<ArticleGroupDao>().HasData(new ArticleGroupDao() { Id = 1, Name = "Lebensmittel" });

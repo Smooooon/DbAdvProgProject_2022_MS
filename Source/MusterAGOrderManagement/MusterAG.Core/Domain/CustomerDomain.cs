@@ -2,6 +2,7 @@
 using MusterAG.BusinessLogic.Dto;
 using MusterAG.BusinessLogic.Mapping;
 using MusterAG.DataAccessLayer.Dao;
+using System.Text.RegularExpressions;
 
 namespace MusterAG.BusinessLogic.Domain
 {
@@ -76,6 +77,68 @@ namespace MusterAG.BusinessLogic.Domain
         public bool DeleteCustomer(int customerIdToDelete)
         {
             return _customerDataService.Delete(customerIdToDelete);
+        }
+
+        public void ValidateCustomer(CustomerDto customerDto)
+        {
+            if (!ValidateCustomerNr(customerDto.CustomerNr))
+            {
+                throw new ArgumentException("The CustomerNr is not valide");
+            }
+
+            if (!ValidateEmail(customerDto.Email))
+            {
+                throw new ArgumentException("The Email is not valide");
+            }
+
+            if (!ValidateWebsite(customerDto.Website))
+            {
+                throw new ArgumentException("The Website is not valide");
+            }
+
+            if (!ValidatePassword(customerDto.Password))
+            {
+                throw new ArgumentException("The Password is not valide");
+            }
+        }
+
+        private bool ValidateCustomerNr(string email)
+        {
+            string regex = @"^CU\d{5}$";
+            Match? match = Regex.Match(email, regex);
+
+            return match.Success;
+        }
+
+        //Die Email Domain-Endung kann beliebig sein z.B. ".xyz"
+        private bool ValidateEmail(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return true;
+
+            string regex = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+            Match ? match = Regex.Match(value, regex);
+
+            return match.Success;
+        }
+
+        private bool ValidateWebsite(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return true;
+
+            string regex = @"^((www\.)|(https:\/\/)|(https:\/\/))?.+\..+$";
+            Match? match = Regex.Match(value, regex);
+
+            return match.Success;
+        }
+
+        private bool ValidatePassword(string value)
+        {
+            string regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
+            Match? match = Regex.Match(value, regex);
+
+            return match.Success;
         }
     }
 }
